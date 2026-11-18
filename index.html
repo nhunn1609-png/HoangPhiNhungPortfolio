@@ -1,0 +1,3325 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Portfolio | Hoàng Phi Nhung - Sư phạm Âm nhạc NUAE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --berry-deep: #5e1938;
+      --berry-primary: #a83868;
+      --berry-mid: #d15b8c;
+      --pink-soft: #f48fb1;
+      --pink-pastel: #ffd6e6;
+      --cream-pearl: #fff9fc;
+      --glass-bg: rgba(255, 248, 252, 0.86);
+      --glass-strong: rgba(255, 251, 253, 0.95);
+      --glass-border: rgba(255, 255, 255, 0.88);
+      --text-main: #43182c;
+      --text-muted: #78425b;
+      --gold-star: #ffcf5c;
+      --shadow-dreamy: 0 18px 45px rgba(94, 25, 56, 0.18);
+      --shadow-hover: 0 24px 55px rgba(168, 56, 104, 0.30);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--text-main);
+      background-color: #b84a72;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255, 214, 230, 0.28), transparent 55%),
+        radial-gradient(circle at 80% 75%, rgba(110, 33, 66, 0.35), transparent 60%),
+        url('back.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* Top Reading Progress Bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      background: linear-gradient(90deg, #ffd6e6, #ffcf5c, #f48fb1, #a83868);
+      background-size: 200% 100%;
+      animation: shimmerBar 3s linear infinite;
+      z-index: 2500;
+      transition: width 0.12s ease-out;
+      box-shadow: 0 0 10px rgba(255, 207, 92, 0.7);
+    }
+
+    @keyframes shimmerBar {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    /* Animated Galaxy & Music Notes Overlay */
+    #cosmic-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Ambient Glowing Orbs + Dreamy Spiral Aura matching back.jpg */
+    .ambient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(70px);
+      pointer-events: none;
+      z-index: 0;
+      animation: floatOrb 14s ease-in-out infinite alternate;
+    }
+    .orb-1 {
+      width: 360px;
+      height: 360px;
+      background: rgba(255, 194, 220, 0.45);
+      top: -70px;
+      left: -80px;
+    }
+    .orb-2 {
+      width: 440px;
+      height: 440px;
+      background: rgba(214, 90, 142, 0.35);
+      bottom: -110px;
+      right: -80px;
+      animation-delay: -5s;
+    }
+    .orb-3 {
+      width: 260px;
+      height: 260px;
+      background: rgba(255, 219, 138, 0.22);
+      top: 42%;
+      left: 48%;
+      animation-delay: -8s;
+    }
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(35px, 28px) scale(1.1); }
+    }
+
+    /* Decorative Floating Stickers (Stars & Planets like back.jpg) */
+    .sky-sticker {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.72;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.65));
+      animation: twinkleFloat 6s ease-in-out infinite;
+    }
+    .sticker-1 { top: 14%; left: 3%; font-size: 1.5rem; animation-delay: 0s; }
+    .sticker-2 { top: 26%; right: 3.5%; font-size: 1.7rem; animation-delay: 1.5s; }
+    .sticker-3 { bottom: 18%; left: 4%; font-size: 1.4rem; animation-delay: 2.8s; }
+
+    @keyframes twinkleFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.55; }
+      50% { transform: translateY(-12px) rotate(10deg) scale(1.15); opacity: 0.92; }
+    }
+
+    /* Navigation Header */
+    .navbar {
+      position: sticky;
+      top: 14px;
+      z-index: 1000;
+      max-width: 1220px;
+      margin: 14px auto 0;
+      padding: 10px 22px;
+      background: rgba(255, 246, 251, 0.86);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 999px;
+      box-shadow: 0 12px 35px rgba(94, 25, 56, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      transition: all 0.35s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 249, 253, 0.94);
+      box-shadow: 0 16px 40px rgba(94, 25, 56, 0.24);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--berry-deep);
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 1.12rem;
+    }
+
+    .brand-disc {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--berry-primary), var(--pink-soft), #ffcf5c, var(--berry-primary));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 14px rgba(168, 56, 104, 0.4);
+      animation: spinSlow 10s linear infinite;
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      padding: 9px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-decoration: none;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      background: linear-gradient(135deg, var(--berry-primary), var(--berry-mid));
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(168, 56, 104, 0.3);
+    }
+
+    /* Dropdown Menu for 6 Exercises */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(10px) scale(0.96);
+      width: 315px;
+      background: var(--glass-strong);
+      backdrop-filter: blur(24px);
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-dreamy);
+      padding: 10px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 1100;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown.open .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item.active {
+      background: linear-gradient(90deg, rgba(244, 143, 177, 0.28), rgba(255, 214, 230, 0.5));
+      color: var(--berry-primary);
+      transform: translateX(4px);
+    }
+
+    .dropdown-badge {
+      background: var(--berry-primary);
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: var(--pink-pastel);
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      color: var(--berry-deep);
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+
+    /* Main Container */
+    .main-wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 1180px;
+      margin: 28px auto 60px;
+      padding: 0 20px;
+    }
+
+    /* Page View Transitions */
+    .page-view {
+      display: none;
+      animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .page-view.active {
+      display: block;
+    }
+
+    @keyframes pageEnter {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Scroll Reveal Animation */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glass Cards */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-dreamy);
+      padding: 32px;
+      margin-bottom: 26px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .glass-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.8s ease;
+      pointer-events: none;
+    }
+
+    .glass-card:hover::before {
+      left: 160%;
+    }
+
+    /* Headings & Badges */
+    .pill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, #ffe3ef, #ffc4dd);
+      color: var(--berry-deep);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 12px rgba(168, 56, 104, 0.12);
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Quicksand', sans-serif;
+      color: var(--berry-deep);
+      line-height: 1.3;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--berry-deep), var(--berry-primary), #e05288);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .handwritten-sub {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.65rem;
+      color: var(--berry-primary);
+      margin-bottom: 14px;
+    }
+
+    /* Hero / About Me Section */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .avatar-stage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Orbiting Galaxy Rings around Avatar */
+    .orbit-ring {
+      position: absolute;
+      width: 294px;
+      height: 294px;
+      top: -17px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(255, 255, 255, 0.8);
+      animation: spinSlow 24s linear infinite;
+      pointer-events: none;
+    }
+    .orbit-ring::after {
+      content: "✦";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      color: #fff6c2;
+      font-size: 1.15rem;
+      text-shadow: 0 0 8px #ffcf5c;
+    }
+
+    .vinyl-halo {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      padding: 12px;
+      background: conic-gradient(from 0deg, #ff9ec4, #fff0f6, #d15b8c, #ffdf9a, #ffd6e6, #ff9ec4);
+      box-shadow: 0 18px 40px rgba(168, 56, 104, 0.32);
+      animation: floatGentle 4.5s ease-in-out infinite;
+    }
+
+    @keyframes floatGentle {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      background: #ffe6f0;
+      display: block;
+    }
+
+    .floating-note {
+      position: absolute;
+      font-size: 1.55rem;
+      color: var(--berry-primary);
+      background: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 20px rgba(94, 25, 56, 0.2);
+      animation: bounceNote 3s ease-in-out infinite;
+    }
+    .note-1 { top: 4px; right: 6px; animation-delay: 0s; }
+    .note-2 { bottom: 14px; left: 2px; animation-delay: 1.2s; }
+    .note-3 { top: 45%; right: -14px; animation-delay: 2.1s; font-size: 1.2rem; width: 36px; height: 36px; }
+
+    @keyframes bounceNote {
+      0%, 100% { transform: translateY(0) rotate(-6deg); }
+      50% { transform: translateY(-9px) rotate(8deg); }
+    }
+
+    /* Live Dancing Soundwave Badge under Avatar */
+    .melody-pill {
+      margin-top: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.5px solid #ffc8df;
+      padding: 7px 16px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+      color: var(--berry-primary);
+      font-size: 0.88rem;
+      box-shadow: 0 6px 16px rgba(168, 56, 104, 0.12);
+    }
+
+    .wave-bars {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      height: 16px;
+    }
+    .wave-bar {
+      width: 3px;
+      height: 5px;
+      border-radius: 3px;
+      background: linear-gradient(180deg, var(--berry-primary), var(--pink-soft));
+      animation: waveIdle 1.6s ease-in-out infinite alternate;
+    }
+    .wave-bar:nth-child(2) { animation-delay: 0.25s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.5s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.75s; }
+    .wave-bars.active-song .wave-bar {
+      animation: waveDance 0.45s ease-in-out infinite alternate;
+    }
+
+    @keyframes waveIdle {
+      from { height: 4px; }
+      to { height: 10px; }
+    }
+    @keyframes waveDance {
+      from { height: 4px; }
+      to { height: 16px; }
+    }
+
+    .student-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0 20px;
+    }
+
+    .info-chip {
+      background: #fff;
+      border: 1.5px solid #ffc8df;
+      padding: 8px 15px;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--berry-deep);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 4px 12px rgba(168, 56, 104, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .info-chip:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(168, 56, 104, 0.16);
+    }
+
+    /* Interactive Mini Piano Widget */
+    .piano-box {
+      background: linear-gradient(135deg, rgba(255, 240, 247, 0.95), rgba(255, 224, 238, 0.92));
+      border: 1.5px solid #fff;
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-top: 22px;
+      box-shadow: 0 10px 28px rgba(168, 56, 104, 0.14);
+    }
+
+    .piano-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .piano-keys {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 8px;
+    }
+
+    .piano-key {
+      height: 86px;
+      background: linear-gradient(180deg, #ffffff 0%, #fff0f6 100%);
+      border: 1.5px solid #f4a4c4;
+      border-bottom: 5px solid #d15b8c;
+      border-radius: 10px 10px 14px 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 10px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      color: var(--berry-deep);
+      transition: all 0.12s ease;
+      user-select: none;
+    }
+
+    .piano-key span.solfege {
+      font-size: 0.95rem;
+    }
+    .piano-key span.kbd {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      background: #ffe3ef;
+      padding: 1px 6px;
+      border-radius: 6px;
+      margin-top: 3px;
+    }
+
+    .piano-key:hover {
+      background: linear-gradient(180deg, #fff5f9 0%, #ffd6e6 100%);
+      transform: translateY(-2px);
+    }
+
+    .piano-key:active,
+    .piano-key.pressed {
+      transform: translateY(3px);
+      border-bottom-width: 2px;
+      background: linear-gradient(180deg, #ffbdd8 0%, #f48fb1 100%);
+      color: #fff;
+      box-shadow: 0 0 14px rgba(244, 143, 177, 0.75);
+    }
+
+    /* Two-column / Three-column Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+
+    .sub-panel {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1.5px solid rgba(255, 214, 230, 0.92);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .sub-panel:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(168, 56, 104, 0.14);
+    }
+
+    /* Project Overview Cards with 3D Tilt support */
+    .project-card {
+      background: rgba(255, 252, 254, 0.92);
+      border: 1.5px solid #fff;
+      border-radius: var(--radius-xl);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 14px 34px rgba(94, 25, 56, 0.14);
+      transition: transform 0.25s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .project-card:hover {
+      box-shadow: var(--shadow-hover);
+      border-color: #ff9ec4;
+    }
+
+    .project-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    .chapter-pill {
+      background: linear-gradient(135deg, var(--berry-primary), var(--berry-mid));
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    /* Dreamy PDF Cinema Viewer at top of each exercise */
+    .pdf-cinema-card {
+      background: linear-gradient(135deg, rgba(94, 25, 56, 0.93), rgba(168, 56, 104, 0.91));
+      color: #fff;
+      border-radius: var(--radius-xl);
+      padding: 22px 26px;
+      margin-bottom: 26px;
+      border: 1.5px solid rgba(255, 214, 230, 0.65);
+      box-shadow: 0 18px 42px rgba(94, 25, 56, 0.28);
+    }
+
+    .pdf-cinema-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .pdf-cinema-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pdf-cinema-title h3 {
+      color: #fff;
+      font-size: 1.12rem;
+    }
+
+    .pdf-cinema-title p {
+      color: #ffd6e6;
+      font-size: 0.85rem;
+    }
+
+    .pdf-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-dreamy {
+      background: linear-gradient(135deg, var(--berry-primary), var(--berry-mid));
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(168, 56, 104, 0.28);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-dreamy:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 12px 26px rgba(168, 56, 104, 0.38);
+    }
+
+    .btn-pearl {
+      background: #fff;
+      color: var(--berry-deep);
+      border: 1.5px solid #ffc8df;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-pearl:hover,
+    .btn-pearl.active-playing {
+      background: #ffe8f2;
+      border-color: var(--berry-mid);
+      transform: translateY(-2px);
+    }
+
+    .pdf-frame-wrap {
+      width: 100%;
+      height: 460px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #2b0c1a;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      transition: height 0.4s ease;
+    }
+
+    .pdf-frame-wrap.expanded {
+      height: 760px;
+    }
+
+    .pdf-frame-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* Section Dividers inside Exercises */
+    .section-block {
+      margin-bottom: 26px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.28rem;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px dashed #f5b3ce;
+    }
+
+    .step-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .step-item {
+      background: rgba(255, 255, 255, 0.85);
+      border-left: 4px solid var(--berry-mid);
+      padding: 14px 18px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(94, 25, 56, 0.05);
+      transition: transform 0.25s ease, border-left-color 0.25s ease;
+    }
+    .step-item:hover {
+      transform: translateX(4px);
+      border-left-color: var(--berry-deep);
+    }
+
+    /* Report Figure Gallery */
+    .figure-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .figure-grid.single-featured {
+      grid-template-columns: minmax(280px, 680px);
+      justify-content: center;
+    }
+
+    .figure-card {
+      background: #fff;
+      border: 1.5px solid #ffd1e4;
+      border-radius: 18px;
+      padding: 12px;
+      box-shadow: 0 10px 24px rgba(94, 25, 56, 0.09);
+      cursor: zoom-in;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .figure-card:hover {
+      transform: translateY(-6px) scale(1.015);
+      box-shadow: 0 18px 36px rgba(168, 56, 104, 0.24);
+      border-color: var(--berry-mid);
+    }
+
+    .figure-card img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #fff2f8;
+      border: 1px solid #ffe0ed;
+    }
+
+    .figure-grid.single-featured .figure-card img {
+      height: auto;
+      max-height: 540px;
+      object-fit: contain;
+    }
+
+    .figure-caption {
+      margin-top: 10px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--berry-deep);
+      text-align: center;
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1.5px solid #ffd1e4;
+      background: rgba(255, 255, 255, 0.94);
+      margin-top: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: linear-gradient(135deg, var(--berry-primary), var(--berry-mid));
+      color: #fff;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      text-align: left;
+      padding: 13px 15px;
+    }
+
+    td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ffe3ef;
+      vertical-align: top;
+    }
+
+    tr:hover td {
+      background: rgba(255, 224, 238, 0.35);
+    }
+
+    .rank-a {
+      background: #dcfce7;
+      color: #166534;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .rank-b {
+      background: #fef3c7;
+      color: #92400e;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    /* Interactive Tabs for Prompt Comparison */
+    .tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      background: #fff;
+      border: 1.5px solid #ffc8df;
+      color: var(--berry-deep);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--berry-primary);
+      color: #fff;
+      border-color: var(--berry-primary);
+      box-shadow: 0 6px 16px rgba(168, 56, 104, 0.24);
+    }
+
+    .prompt-tier {
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      border: 1.5px solid #ffd6e6;
+      transition: transform 0.2s ease;
+    }
+    .prompt-tier:hover {
+      transform: translateY(-2px);
+    }
+
+    .prompt-tier.highlight {
+      border: 2px solid var(--berry-mid);
+      background: linear-gradient(135deg, #fff, #fff4f9);
+    }
+
+    .prompt-code {
+      background: #fdf2f7;
+      border-left: 3px solid var(--berry-primary);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      color: #4a1930;
+      margin: 8px 0;
+      white-space: pre-line;
+    }
+
+    /* Collapsible Harvard Reference Accordion */
+    details.harvard-box {
+      margin-top: 16px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1.5px solid #ffc8df;
+      border-radius: 16px;
+      padding: 14px 20px;
+    }
+    details.harvard-box summary {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      color: var(--berry-deep);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    details.harvard-box ol {
+      margin-top: 12px;
+      padding-left: 22px;
+      font-size: 0.89rem;
+      display: grid;
+      gap: 7px;
+    }
+
+    /* Progress Bar for AI vs Human Contribution */
+    .ratio-bar {
+      height: 28px;
+      border-radius: 999px;
+      overflow: hidden;
+      display: flex;
+      background: #ffe3ef;
+      border: 2px solid #fff;
+      box-shadow: 0 4px 12px rgba(94, 25, 56, 0.12);
+      margin: 10px 0;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .ratio-ai {
+      background: linear-gradient(90deg, #f48fb1, #d15b8c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+      white-space: nowrap;
+    }
+
+    .ratio-human {
+      background: linear-gradient(90deg, #8e2454, #5e1938);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+      white-space: nowrap;
+    }
+
+    /* Exercise Bottom Navigation */
+    .exercise-nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 2px dashed #f5b3ce;
+    }
+
+    /* Floating Canon in D (Piano & Cello) Player Widget */
+    .music-widget {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 1200;
+      background: rgba(255, 246, 251, 0.94);
+      backdrop-filter: blur(18px);
+      border: 1.5px solid #fff;
+      border-radius: 999px;
+      padding: 8px 18px 8px 10px;
+      box-shadow: 0 12px 32px rgba(94, 25, 56, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .music-widget:hover {
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 16px 38px rgba(168, 56, 104, 0.34);
+    }
+
+    .vinyl-mini {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffd6e6 20%, #5e1938 22%, #2b0c1a 65%, #a83868 100%);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 0.9rem;
+      box-shadow: 0 3px 10px rgba(94, 25, 56, 0.3);
+    }
+
+    .vinyl-mini.playing {
+      animation: spinSlow 4s linear infinite;
+    }
+
+    .eq-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 15px;
+    }
+
+    .eq-bar {
+      width: 3px;
+      height: 4px;
+      background: var(--berry-primary);
+      border-radius: 2px;
+      transition: height 0.2s ease;
+    }
+
+    .playing .eq-bar {
+      animation: eqPulse 0.65s ease-in-out infinite alternate;
+    }
+    .playing .eq-bar:nth-child(2) { animation-delay: 0.18s; }
+    .playing .eq-bar:nth-child(3) { animation-delay: 0.36s; }
+    .playing .eq-bar:nth-child(4) { animation-delay: 0.52s; }
+
+    @keyframes eqPulse {
+      from { height: 4px; }
+      to { height: 15px; }
+    }
+
+    /* Floating Back-to-Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 84px;
+      right: 26px;
+      z-index: 1150;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--berry-primary), var(--pink-soft));
+      color: #fff;
+      border: 2px solid #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 22px rgba(94, 25, 56, 0.25);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: all 0.3s ease;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .back-to-top:hover {
+      transform: translateY(-3px) scale(1.06);
+    }
+
+    /* Lightbox Modal with Prev/Next Controls */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(43, 12, 26, 0.88);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lightbox.open {
+      display: flex;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .lightbox-content {
+      max-width: 92vw;
+      max-height: 90vh;
+      background: #fff;
+      padding: 16px;
+      border-radius: 22px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-content img {
+      max-width: 100%;
+      max-height: 72vh;
+      border-radius: 14px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--berry-primary);
+      color: #fff;
+      border: 2px solid #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .lightbox-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 2;
+      max-width: 1180px;
+      margin: 0 auto 30px;
+      padding: 22px 28px;
+      background: rgba(255, 246, 251, 0.88);
+      backdrop-filter: blur(18px);
+      border: 1.5px solid #fff;
+      border-radius: var(--radius-xl);
+      text-align: center;
+      box-shadow: var(--shadow-dreamy);
+      font-size: 0.92rem;
+    }
+
+    /* Search input for Bai 2 */
+    .search-box {
+      width: 100%;
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: 1.5px solid #f4a4c4;
+      background: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.92rem;
+      color: var(--berry-deep);
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    .search-box:focus {
+      border-color: var(--berry-primary);
+      box-shadow: 0 0 0 4px rgba(244, 143, 177, 0.25);
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .student-badges {
+        justify-content: center;
+      }
+      .mobile-toggle {
+        display: grid;
+        place-items: center;
+      }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        background: var(--glass-strong);
+        border-radius: 24px;
+        padding: 16px;
+        flex-direction: column;
+        align-items: stretch;
+        box-shadow: var(--shadow-dreamy);
+      }
+      .nav-links.mobile-open {
+        display: flex;
+      }
+      .dropdown-menu {
+        position: static;
+        transform: none;
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        box-shadow: none;
+        background: rgba(255, 230, 241, 0.5);
+        margin-top: 6px;
+      }
+      .piano-keys {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .ratio-bar {
+        font-size: 0.7rem;
+      }
+      .sky-sticker {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Reading Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Ambient Cosmic Glow, Decorative Stickers & Particle Canvas -->
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
+  <span class="sky-sticker sticker-1">🪐</span>
+  <span class="sky-sticker sticker-2">✨</span>
+  <span class="sky-sticker sticker-3">🎼</span>
+  <canvas id="cosmic-canvas"></canvas>
+
+  <!-- Navigation Header -->
+  <nav class="navbar" id="mainNavbar" aria-label="Điều hướng chính">
+    <a href="#about" class="brand" onclick="navigateTo('about')">
+      <span class="brand-disc">♫</span>
+      <span>Phi Nhung • Music Portfolio</span>
+    </a>
+
+    <button class="mobile-toggle" onclick="toggleMobileMenu()" aria-label="Mở menu">☰</button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><button class="nav-btn active" data-page="about" onclick="navigateTo('about')">✨ Giới thiệu</button></li>
+      <li class="dropdown" id="projectDropdown">
+        <button class="nav-btn" data-page="projects" onclick="navigateTo('projects')">🎼 Dự án (6 Bài) ▾</button>
+        <div class="dropdown-menu">
+          <button class="dropdown-item" data-page="bai-1" onclick="navigateTo('bai-1')">
+            <span class="dropdown-badge">Bài 1</span>
+            <span>Quản lý tệp tin &amp; thư mục</span>
+          </button>
+          <button class="dropdown-item" data-page="bai-2" onclick="navigateTo('bai-2')">
+            <span class="dropdown-badge">Bài 2</span>
+            <span>Khai thác &amp; đánh giá học thuật</span>
+          </button>
+          <button class="dropdown-item" data-page="bai-3" onclick="navigateTo('bai-3')">
+            <span class="dropdown-badge">Bài 3</span>
+            <span>Kỹ thuật viết Prompt AI</span>
+          </button>
+          <button class="dropdown-item" data-page="bai-4" onclick="navigateTo('bai-4')">
+            <span class="dropdown-badge">Bài 4</span>
+            <span>Hợp tác trực tuyến dự án nhóm</span>
+          </button>
+          <button class="dropdown-item" data-page="bai-5" onclick="navigateTo('bai-5')">
+            <span class="dropdown-badge">Bài 5</span>
+            <span>Sáng tạo Infographic với AI</span>
+          </button>
+          <button class="dropdown-item" data-page="bai-6" onclick="navigateTo('bai-6')">
+            <span class="dropdown-badge">Bài 6</span>
+            <span>Sử dụng AI có trách nhiệm</span>
+          </button>
+        </div>
+      </li>
+      <li><button class="nav-btn" data-page="conclusion" onclick="navigateTo('conclusion')">🌟 Tổng kết</button></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="main-wrapper">
+
+    <!-- ==================== PAGE 1: ABOUT ME ==================== -->
+    <section id="page-about" class="page-view active">
+      <div class="glass-card">
+        <div class="hero-grid">
+          <div class="avatar-stage">
+            <div class="orbit-ring"></div>
+            <div class="vinyl-halo">
+              <img src="avt.jpg" alt="Ảnh đại diện Hoàng Phi Nhung" class="avatar-img"
+                   onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect width=%22200%22 height=%22200%22 fill=%22%23ffd6e6%22/><text x=%2250%25%22 y=%2246%25%22 font-size=%2252%22 text-anchor=%22middle%22 fill=%22%23a83868%22>🎵</text><text x=%2250%25%22 y=%2268%25%22 font-family=%22sans-serif%22 font-size=%2216%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%235e1938%22>Hoàng Phi Nhung</text></svg>'" />
+              <span class="floating-note note-1">♪</span>
+              <span class="floating-note note-2">♫</span>
+              <span class="floating-note note-3">✦</span>
+            </div>
+            <div class="melody-pill">
+              <span class="wave-bars" id="heroWaveBars">
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+              </span>
+              <span>🎧 Giai điệu số &amp; Cảm hứng sư phạm</span>
+            </div>
+          </div>
+
+          <div>
+            <span class="pill-tag">✨ Digital Portfolio • Học phần INF2501</span>
+            <h1 class="hero-title">Hoàng Phi Nhung</h1>
+            <p class="handwritten-sub">“Khi thanh âm nghệ thuật hòa nhịp cùng công nghệ số mộng mơ”</p>
+
+            <div class="student-badges">
+              <span class="info-chip">🪪 MSSV: 2552210092</span>
+              <span class="info-chip">🎹 Ngành: Sư phạm Âm nhạc</span>
+              <span class="info-chip">🏛️ ĐH Sư phạm Nghệ thuật Trung ương (NUAE)</span>
+            </div>
+
+            <p style="margin-bottom: 14px;">
+              Chào mừng thầy cô và các bạn ghé thăm góc nhỏ lưu trữ hành trình học tập của mình tại học phần
+              <strong>Nhập môn công nghệ số và ứng dụng trí tuệ nhân tạo</strong>. Là một sinh viên chuyên ngành
+              Sư phạm Âm nhạc tại <strong>Trường Đại học Sư phạm Nghệ thuật Trung ương</strong>, mình luôn tin rằng
+              âm nhạc không chỉ vang lên từ phím đàn hay trang khuông nhạc giấy, mà còn có thể lan tỏa sinh động hơn
+              khi kết hợp cùng tư duy số hiện đại.
+            </p>
+            <p>
+              Ngoài giờ học ký xướng âm, hòa âm và luyện đàn piano, mình rất thích tìm tòi các phần mềm ký âm,
+              thiết kế học liệu trực quan và khám phá cách ứng dụng AI một cách thông minh, có trách nhiệm để
+              từng tiết học âm nhạc phổ thông trở nên gần gũi và giàu cảm xúc hơn với học sinh.
+            </p>
+
+            <!-- Interactive Mini Piano + Canon in D Welcome Phrase -->
+            <div class="piano-box">
+              <div class="piano-header">
+                <div>
+                  <h4 style="font-size: 1rem;">🎹 Phím Đàn Mộng Mơ (Chạm phím hoặc bấm A–K)</h4>
+                  <p style="font-size: 0.82rem; color: var(--text-muted);">Dạo vài nốt nhạc hoặc nhấn nút bên cạnh để nghe khúc dạo <strong>Canon in D (Piano &amp; Cello)</strong> chào mừng nhé!</p>
+                </div>
+                <button class="btn-pearl" id="welcomeCanonBtn" onclick="playWelcomeCanon()">🎻 Nghe Canon in D chào mừng</button>
+              </div>
+              <div class="piano-keys" id="pianoKeys">
+                <button class="piano-key" data-note="261.63" data-key="a"><span class="solfege">Đô</span><span class="kbd">A</span></button>
+                <button class="piano-key" data-note="293.66" data-key="s"><span class="solfege">Rê</span><span class="kbd">S</span></button>
+                <button class="piano-key" data-note="329.63" data-key="d"><span class="solfege">Mi</span><span class="kbd">D</span></button>
+                <button class="piano-key" data-note="349.23" data-key="f"><span class="solfege">Pha</span><span class="kbd">F</span></button>
+                <button class="piano-key" data-note="392.00" data-key="g"><span class="solfege">Sol</span><span class="kbd">G</span></button>
+                <button class="piano-key" data-note="440.00" data-key="h"><span class="solfege">La</span><span class="kbd">H</span></button>
+                <button class="piano-key" data-note="493.88" data-key="j"><span class="solfege">Si</span><span class="kbd">J</span></button>
+                <button class="piano-key" data-note="523.25" data-key="k"><span class="solfege">Đô²</span><span class="kbd">K</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Goals Grid -->
+      <div class="grid-2">
+        <div class="glass-card reveal-item">
+          <span class="pill-tag">🎯 Định hướng tương lai</span>
+          <h2 style="margin-bottom: 12px;">Mục tiêu học tập &amp; Phát triển cá nhân</h2>
+          <ul class="step-list">
+            <li class="step-item">
+              <strong>Làm chủ năng lực số sư phạm:</strong> Thành thạo kỹ năng tổ chức dữ liệu khoa học, khai thác tài liệu học thuật chuẩn xác và vận hành các công cụ cộng tác trực tuyến phục vụ giảng dạy.
+            </li>
+            <li class="step-item">
+              <strong>Đổi mới tiết học Âm nhạc theo GDPT 2018:</strong> Kết hợp hài hòa giữa phương pháp sư phạm âm nhạc truyền thống (hát, đọc nhạc, cảm thụ, nhạc cụ dân tộc) với học liệu đa phương tiện tương tác.
+            </li>
+            <li class="step-item">
+              <strong>Giữ vững bản sắc &amp; đạo đức nghề giáo:</strong> Ứng dụng trí tuệ nhân tạo như một trợ lý gợi mở sáng tạo nhưng luôn đặt tư duy thẩm mỹ cá nhân và liêm chính học thuật làm gốc.
+            </li>
+          </ul>
+        </div>
+
+        <div class="glass-card reveal-item">
+          <span class="pill-tag">📁 Ý nghĩa trang web</span>
+          <h2 style="margin-bottom: 12px;">Mục tiêu của Digital Portfolio</h2>
+          <ul class="step-list">
+            <li class="step-item">
+              <strong>Hệ thống hóa 06 chặng thực hành:</strong> Tập hợp đầy đủ quá trình thực hiện, sản phẩm minh chứng và bản PDF báo cáo gốc của 06 bài tập lớn xuyên suốt học phần.
+            </li>
+            <li class="step-item">
+              <strong>Không gian lưu trữ trực quan, dễ chia sẻ:</strong> Giúp giảng viên dễ dàng theo dõi tiến độ, kiểm chứng tính xác thực và trải nghiệm trực tiếp từng sản phẩm số ngay trên một nền tảng thống nhất.
+            </li>
+            <li class="step-item">
+              <strong>Hồ sơ năng lực cá nhân dài hạn:</strong> Là bước khởi đầu để mình tiếp tục bổ sung giáo án điện tử, bản phối ký âm và dự án nghệ thuật học đường trong suốt những năm đại học.
+            </li>
+          </ul>
+          <div style="margin-top: 18px; text-align: right;">
+            <button class="btn-dreamy" onclick="navigateTo('projects')">Khám phá 06 Bài tập Dự án →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PAGE 2: PROJECTS OVERVIEW ==================== -->
+    <section id="page-projects" class="page-view">
+      <div class="glass-card" style="text-align: center;">
+        <span class="pill-tag">🎼 Danh mục sản phẩm học phần • 06 Chương</span>
+        <h1 class="hero-title">Dự Án &amp; Hành Trình Thực Hành Số</h1>
+        <p style="max-width: 740px; margin: 0 auto; color: var(--text-muted);">
+          Mỗi bài tập dưới đây là một mảnh ghép kỹ năng được mình biên tập lại từ quá trình tự học và thực hành,
+          gắn liền trực tiếp với chuyên ngành <strong>Sư phạm Âm nhạc</strong>. Nhấp vào từng thẻ để xem trình chiếu
+          báo cáo PDF gốc, quy trình thực hiện và sản phẩm chi tiết nhé!
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <!-- Card 1 -->
+        <article class="project-card tilt-card" onclick="navigateTo('bai-1')">
+          <div>
+            <div class="project-num">
+              <span class="chapter-pill">Chương 1 • Bài 1 (Mục 1.4)</span>
+              <span>🗂️</span>
+            </div>
+            <h3 style="margin-bottom: 8px;">Thao tác cơ bản với tệp tin và thư mục</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+              Thiết lập cấu trúc lưu trữ khoa học <code>ThucHanh_HoangPhiNhung</code> trên phân vùng dữ liệu, thực hành đầy đủ 12 thao tác tạo, đổi tên, sao chép, di chuyển, xóa và khôi phục dữ liệu.
+            </p>
+          </div>
+          <button class="btn-dreamy" style="width: 100%; justify-content: center;">Xem chi tiết Bài 1 →</button>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="project-card tilt-card" onclick="navigateTo('bai-2')">
+          <div>
+            <div class="project-num">
+              <span class="chapter-pill">Chương 2 • Bài 2 (Mục 2.4)</span>
+              <span>🔎</span>
+            </div>
+            <h3 style="margin-bottom: 8px;">Tìm kiếm và đánh giá thông tin học thuật</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+              Khai thác 12 tài liệu chuyên ngành về ứng dụng công nghệ số trong dạy học Âm nhạc phổ thông bằng toán tử Boolean và thẩm định theo 5 tiêu chí xếp hạng A/B.
+            </p>
+          </div>
+          <button class="btn-dreamy" style="width: 100%; justify-content: center;">Xem chi tiết Bài 2 →</button>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="project-card tilt-card" onclick="navigateTo('bai-3')">
+          <div>
+            <div class="project-num">
+              <span class="chapter-pill">Chương 3 • Bài 3 (Mục 3.4)</span>
+              <span>🪄</span>
+            </div>
+            <h3 style="margin-bottom: 8px;">Viết Prompt hiệu quả cho các tác vụ học tập</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+              Thử nghiệm 9 phiên bản câu lệnh qua 3 tác vụ Sư phạm Âm nhạc (tóm tắt nghiên cứu, giải thích chuyển điệu hòa âm, tạo đề ôn tập Bloom) và đúc kết mô hình R-C-T-F-E.
+            </p>
+          </div>
+          <button class="btn-dreamy" style="width: 100%; justify-content: center;">Xem chi tiết Bài 3 →</button>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="project-card tilt-card" onclick="navigateTo('bai-4')">
+          <div>
+            <div class="project-num">
+              <span class="chapter-pill">Chương 4 • Bài 4 (Mục 4.4)</span>
+              <span>🤝</span>
+            </div>
+            <h3 style="margin-bottom: 8px;">Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+              Điều phối dự án xây dựng bộ học liệu số Âm nhạc lớp 7 trong 7 ngày với hệ sinh thái 4 công cụ: ClickUp (15 tasks), Google Docs, Google Drive (/NMCNS) và Zalo.
+            </p>
+          </div>
+          <button class="btn-dreamy" style="width: 100%; justify-content: center;">Xem chi tiết Bài 4 →</button>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="project-card tilt-card" onclick="navigateTo('bai-5')">
+          <div>
+            <div class="project-num">
+              <span class="chapter-pill">Chương 5 • Bài 5 (Mục 5.4)</span>
+              <span>🎨</span>
+            </div>
+            <h3 style="margin-bottom: 8px;">Sử dụng AI tạo sinh hỗ trợ sáng tạo nội dung</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+              Phối hợp Google Gemini, DALL-E và Canva AI thiết kế Infographic <em>“Thanh Âm Đất Việt”</em> về 4 họ nhạc cụ dân tộc với 60% giá trị hiệu đính chuyên môn cá nhân.
+            </p>
+          </div>
+          <button class="btn-dreamy" style="width: 100%; justify-content: center;">Xem chi tiết Bài 5 →</button>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="project-card tilt-card" onclick="navigateTo('bai-6')">
+          <div>
+            <div class="project-num">
+              <span class="chapter-pill">Chương 6 • Bài 6 (Mục 6.4)</span>
+              <span>🛡️</span>
+            </div>
+            <h3 style="margin-bottom: 8px;">Sử dụng AI có trách nhiệm trong học tập &amp; nghiên cứu</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+              Đối sánh chính sách AI (NUAE – VNU – HUST), thực hành soạn chuyên đề phương pháp Dalcroze Eurhythmics minh bạch (30% AI – 70% tự biên tập) và xây dựng 6 nguyên tắc vàng.
+            </p>
+          </div>
+          <button class="btn-dreamy" style="width: 100%; justify-content: center;">Xem chi tiết Bài 6 →</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== PAGE 3: BÀI TẬP 1 ==================== -->
+    <section id="page-bai-1" class="page-view">
+      <!-- Dreamy PDF Cinema Viewer -->
+      <div class="pdf-cinema-card">
+        <div class="pdf-cinema-header">
+          <div class="pdf-cinema-title">
+            <span style="font-size: 1.8rem;">📄</span>
+            <div>
+              <h3>Trình Chiếu Bản PDF Báo Cáo Gốc — Bài Tập 1</h3>
+              <p>Tệp lưu trữ công khai trên Google Drive • Hoàng Phi Nhung (2552210092)</p>
+            </div>
+          </div>
+          <div class="pdf-controls">
+            <button class="btn-pearl" onclick="togglePdfSize('pdf-frame-1')">↕️ Mở rộng / Thu gọn khung chiếu</button>
+            <a href="https://drive.google.com/file/d/1PVK1S0ZMekoXbtSDgLzDPw4V3Xtj_W3b/view?usp=sharing" target="_blank" rel="noopener" class="btn-pearl">↗ Mở tab mới</a>
+          </div>
+        </div>
+        <div class="pdf-frame-wrap" id="pdf-frame-1">
+          <iframe src="https://drive.google.com/file/d/1PVK1S0ZMekoXbtSDgLzDPw4V3Xtj_W3b/preview" allow="autoplay" title="Báo cáo gốc Bài tập 1"></iframe>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <span class="pill-tag">Chương 1: Máy tính và các thiết bị ngoại vi • Bài tập 1 (Mục 1.4)</span>
+        <h1 class="hero-title" style="font-size: 2.1rem;">Thao Tác Cơ Bản Với Tệp Tin Và Thư Mục</h1>
+        <p style="color: var(--text-muted); margin-bottom: 22px;">
+          Xây dựng thói quen tổ chức không gian lưu trữ ngăn nắp ngay từ những thao tác nền tảng trên Windows File Explorer.
+        </p>
+
+        <!-- 1. Mục tiêu bài tập -->
+        <div class="section-block">
+          <h2 class="section-heading">🎯 1. Mục tiêu bài tập</h2>
+          <div class="sub-panel">
+            <p>
+              Bài thực hành giúp mình rèn luyện kỹ năng làm chủ hệ thống tệp tin và thư mục trên hệ điều hành Windows một cách chính xác, an toàn:
+              từ việc khởi chạy nhanh File Explorer, lựa chọn đúng phân vùng ổ đĩa dữ liệu tách biệt với ổ cài đặt hệ điều hành (ổ <code>C:</code>),
+              đến quy trình tạo mới, đặt tên chuẩn không dấu, tạo cấu trúc thư mục phân cấp, sao chép (Copy), di chuyển (Cut),
+              xóa tạm vào Thùng rác, xóa vĩnh viễn và khôi phục dữ liệu khi thao tác nhầm.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2. Tóm tắt quá trình thực hiện -->
+        <div class="section-block">
+          <h2 class="section-heading">🛠️ 2. Tóm tắt quá trình thực hiện &amp; Giải quyết vấn đề</h2>
+          <div class="grid-2" style="margin-bottom: 16px;">
+            <div class="sub-panel">
+              <h4 style="margin-bottom: 8px;">💻 Công cụ &amp; Môi trường thực hiện</h4>
+              <p style="font-size: 0.92rem;">
+                Sử dụng <strong>Windows File Explorer</strong> kết hợp các phím tắt tăng hiệu suất như <code>Windows + E</code> (mở trình quản lý tệp),
+                <code>F2</code> (đổi tên nhanh), <code>Ctrl + C / Ctrl + X / Ctrl + V</code> (sao chép, di chuyển, dán) và <code>Shift + Delete</code> (xóa vĩnh viễn).
+                Bài tập này được thực hiện hoàn toàn thủ công trên máy tính cá nhân để kiểm chứng trực tiếp từng thao tác hệ thống.
+              </p>
+            </div>
+            <div class="sub-panel">
+              <h4 style="margin-bottom: 8px;">💡 Khó khăn nhỏ &amp; Cách xử lý</h4>
+              <p style="font-size: 0.92rem;">
+                Khi phân biệt giữa <strong>xóa thông thường (Delete)</strong> và <strong>xóa vĩnh viễn (Shift + Delete)</strong>,
+                nếu thao tác vội trên tệp gốc sẽ dễ mất dữ liệu không thể phục hồi. Mình đã chủ động tạo bản sao <code>GhiChuQuanTrong.txt</code>
+                trong thư mục con <code>TaiLieu</code> trước khi thử nghiệm xóa vào Recycle Bin và dùng tệp riêng <code>DiChuyen.txt</code> để kiểm thử xóa vĩnh viễn.
+              </p>
+            </div>
+          </div>
+
+          <ul class="step-list">
+            <li class="step-item"><strong>Giai đoạn 1 – Khởi tạo không gian gốc (Bước 1–4):</strong> Mở File Explorer bằng <code>Windows + E</code>, truy cập ổ đĩa dữ liệu <code>D:</code> trong <em>This PC</em>, tạo thư mục chính <code>ThucHanh_HoangPhiNhung</code> theo quy tắc viết liền không dấu.</li>
+            <li class="step-item"><strong>Giai đoạn 2 – Quản lý tệp &amp; phân cấp thư mục (Bước 5–7):</strong> Tạo tệp <code>GhiChu.txt</code>, dùng phím <code>F2</code> đổi tên thành <code>GhiChuQuanTrong.txt</code>, đồng thời khởi tạo thư mục con <code>TaiLieu</code> bên trong.</li>
+            <li class="step-item"><strong>Giai đoạn 3 – Điều phối &amp; an toàn dữ liệu (Bước 8–12):</strong> Sao chép <code>GhiChuQuanTrong.txt</code> vào <code>TaiLieu</code>; tạo và di chuyển hoàn toàn tệp <code>DiChuyen.txt</code> vào <code>TaiLieu</code>; thực hành xóa <code>GhiChuQuanTrong.txt</code> vào Thùng rác rồi khôi phục (<em>Restore</em>) về nguyên trạng, và xác nhận hộp thoại xóa hẳn <code>DiChuyen.txt</code> bằng <code>Shift + Delete</code>.</li>
+          </ul>
+        </div>
+
+        <!-- 3. Sản phẩm cuối cùng -->
+        <div class="section-block">
+          <h2 class="section-heading">✨ 3. Sản phẩm cuối cùng &amp; Minh chứng 12 bước thực hành</h2>
+          <div class="sub-panel" style="margin-bottom: 16px;">
+            <h4 style="margin-bottom: 6px;">🌲 Cấu trúc cây thư mục &amp; Quy tắc đặt tên đã thiết lập</h4>
+            <pre style="font-family: monospace; font-size: 0.9rem; color: var(--berry-deep); background: #fff5f9; padding: 12px; border-radius: 10px; overflow-x: auto;">D:\
+└── ThucHanh_HoangPhiNhung\          (Tên thư mục viết liền không dấu, dùng gạch dưới phân tách)
+    ├── GhiChuQuanTrong.txt          (Bản gốc được bảo toàn tại thư mục cha)
+    └── TaiLieu\                     (Thư mục con phân loại tài liệu)
+        └── GhiChuQuanTrong.txt      (Bản sao được khôi phục nguyên vẹn từ Recycle Bin)</pre>
+          </div>
+
+          <div class="figure-grid">
+            <div class="figure-card" onclick="openLightbox('Hình 1.jpg', 'Hình 1: Giao diện khởi chạy trình quản lý tệp tin File Explorer')">
+              <img src="Hình 1.jpg" alt="Hình 1" />
+              <div class="figure-caption">Hình 1: Khởi chạy File Explorer</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 2.jpg', 'Hình 2: Truy cập phân vùng ổ đĩa dữ liệu (D:) trong mục This PC')">
+              <img src="Hình 2.jpg" alt="Hình 2" />
+              <div class="figure-caption">Hình 2: Truy cập ổ đĩa dữ liệu D:</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 3.jpg', 'Hình 3: Tạo thư mục mới có tên ThucHanh_HoangPhiNhung')">
+              <img src="Hình 3.jpg" alt="Hình 3" />
+              <div class="figure-caption">Hình 3: Tạo thư mục ThucHanh_HoangPhiNhung</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 4.jpg', 'Hình 4: Không gian làm việc bên trong thư mục ThucHanh_HoangPhiNhung')">
+              <img src="Hình 4.jpg" alt="Hình 4" />
+              <div class="figure-caption">Hình 4: Không gian bên trong thư mục</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 5.jpg', 'Hình 5: Tạo tệp tin văn bản GhiChu.txt trong thư mục thực hành')">
+              <img src="Hình 5.jpg" alt="Hình 5" />
+              <div class="figure-caption">Hình 5: Tạo tệp GhiChu.txt</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 6.jpg', 'Hình 6: Đổi tên tệp GhiChu.txt thành GhiChuQuanTrong.txt')">
+              <img src="Hình 6.jpg" alt="Hình 6" />
+              <div class="figure-caption">Hình 6: Đổi tên thành GhiChuQuanTrong.txt</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 7.jpg', 'Hình 7: Tạo thư mục con TaiLieu bên trong ThucHanh_HoangPhiNhung')">
+              <img src="Hình 7.jpg" alt="Hình 7" />
+              <div class="figure-caption">Hình 7: Tạo thư mục con TaiLieu</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 8.jpg', 'Hình 8: Sao chép tệp GhiChuQuanTrong.txt vào thư mục con TaiLieu')">
+              <img src="Hình 8.jpg" alt="Hình 8" />
+              <div class="figure-caption">Hình 8: Copy &amp; Paste vào TaiLieu</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 9.jpg', 'Hình 9: Di chuyển tệp DiChuyen.txt vào thư mục con TaiLieu')">
+              <img src="Hình 9.jpg" alt="Hình 9" />
+              <div class="figure-caption">Hình 9: Cut &amp; Paste tệp DiChuyen.txt</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 10.jpg', 'Hình 10: Thực hiện xóa tệp GhiChuQuanTrong.txt vào Thùng rác')">
+              <img src="Hình 10.jpg" alt="Hình 10" />
+              <div class="figure-caption">Hình 10: Xóa tệp vào Recycle Bin</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 11.jpg', 'Hình 11: Hộp thoại xác nhận xóa vĩnh viễn tệp DiChuyen.txt bằng Shift + Delete')">
+              <img src="Hình 11.jpg" alt="Hình 11" />
+              <div class="figure-caption">Hình 11: Xóa vĩnh viễn Shift + Delete</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 12.jpg', 'Hình 12: Khôi phục tệp GhiChuQuanTrong.txt từ Recycle Bin về vị trí ban đầu')">
+              <img src="Hình 12.jpg" alt="Hình 12" />
+              <div class="figure-caption">Hình 12: Khôi phục (Restore) từ Thùng rác</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise-nav-footer">
+          <button class="btn-pearl" onclick="navigateTo('projects')">← Quay lại trang Dự án</button>
+          <button class="btn-dreamy" onclick="navigateTo('bai-2')">Sang Bài tập 2 →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PAGE 4: BÀI TẬP 2 ==================== -->
+    <section id="page-bai-2" class="page-view">
+      <div class="pdf-cinema-card">
+        <div class="pdf-cinema-header">
+          <div class="pdf-cinema-title">
+            <span style="font-size: 1.8rem;">📄</span>
+            <div>
+              <h3>Trình Chiếu Bản PDF Báo Cáo Gốc — Bài Tập 2</h3>
+              <p>Khai thác &amp; đánh giá thông tin học thuật • Hoàng Phi Nhung (2552210092)</p>
+            </div>
+          </div>
+          <div class="pdf-controls">
+            <button class="btn-pearl" onclick="togglePdfSize('pdf-frame-2')">↕️ Mở rộng / Thu gọn khung chiếu</button>
+            <a href="https://drive.google.com/file/d/1TCzfjFm2SEK0zslIKpOzVJYoARPPRgIn/view?usp=sharing" target="_blank" rel="noopener" class="btn-pearl">↗ Mở tab mới</a>
+          </div>
+        </div>
+        <div class="pdf-frame-wrap" id="pdf-frame-2">
+          <iframe src="https://drive.google.com/file/d/1TCzfjFm2SEK0zslIKpOzVJYoARPPRgIn/preview" allow="autoplay" title="Báo cáo gốc Bài tập 2"></iframe>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <span class="pill-tag">Chương 2: Khai thác dữ liệu và thông tin • Bài tập 2 (Mục 2.4)</span>
+        <h1 class="hero-title" style="font-size: 2.1rem;">Tìm Kiếm Và Đánh Giá Thông Tin Học Thuật</h1>
+        <p style="color: var(--text-muted); margin-bottom: 22px;">
+          Chủ đề nghiên cứu: <strong>“Ứng dụng công nghệ số trong đổi mới phương pháp dạy học môn Âm nhạc tại trường phổ thông”</strong>.
+        </p>
+
+        <div class="section-block">
+          <h2 class="section-heading">🎯 1. Mục tiêu bài tập</h2>
+          <div class="sub-panel">
+            <p>
+              Rèn luyện tư duy tra cứu thông tin có hệ thống thay vì tìm kiếm cảm tính trên mạng internet. Mình đặt mục tiêu xây dựng
+              bộ từ khóa song ngữ kết hợp toán tử tìm kiếm nâng cao, khai thác đồng bộ nhiều cơ sở dữ liệu học thuật uy tín và
+              biết cách phản biện, xếp hạng độ tin cậy của từng tài liệu phục vụ nghiên cứu chuyên ngành Sư phạm Âm nhạc theo Chương trình GDPT 2018.
+            </p>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading">🛠️ 2. Tóm tắt quá trình thực hiện &amp; Công cụ sử dụng</h2>
+          <div class="grid-2">
+            <div class="sub-panel">
+              <h4 style="margin-bottom: 8px;">🔍 Chiến lược từ khóa &amp; Công cụ tra cứu</h4>
+              <p style="font-size: 0.92rem; margin-bottom: 8px;">
+                Sử dụng <strong>Google Scholar, Semantic Scholar, ERIC</strong>, Thư viện điện tử NUAE, các tạp chí bình duyệt
+                (<em>Tạp chí Giáo dục Nghệ thuật, Music Education Research, JRME</em>) và Cổng thông tin Bộ GD&amp;ĐT.
+              </p>
+              <div class="prompt-code">“dạy học âm nhạc” AND “công nghệ số”
+“phương pháp dạy học âm nhạc” AND “phổ thông”
+"digital technology" AND "music education"
+"blended learning" OR "music pedagogy"</div>
+            </div>
+            <div class="sub-panel">
+              <h4 style="margin-bottom: 8px;">💡 Khó khăn gặp phải &amp; Giải pháp</h4>
+              <p style="font-size: 0.92rem;">
+                Tài liệu quốc tế (như Bauer 2020 hay Dorfman 2016) nghiên cứu trên điều kiện lớp học 1:1 ở Bắc Mỹ rất hiện đại nhưng chưa sát thực tế cơ sở vật chất phổ thông Việt Nam; ngược lại một số giáo trình kinh điển trong nước (Hoàng Long &amp; Hoàng Lân, 2005) lại viết trước kỷ nguyên số.
+                <strong>Cách giải quyết:</strong> Mình kết hợp cả 2 nhóm nguồn để vừa có khung lý luận sư phạm chuẩn Việt Nam, vừa cập nhật công cụ số giai đoạn 2015–2026, đồng thời mở rộng tra cứu thêm Luận án Tiến sĩ bảo vệ tại NUAE (Nguyễn Thị Tố Mai, 2022).
+              </p>
+            </div>
+          </div>
+
+          <div class="figure-grid single-featured">
+            <div class="figure-card" onclick="openLightbox('Hình 13.jpg', 'Hình 13: Minh họa kết quả tìm kiếm tài liệu học thuật chuyên ngành Sư phạm Âm nhạc trên Google Scholar')">
+              <img src="Hình 13.jpg" alt="Hình 13" />
+              <div class="figure-caption">Hình 13: Kết quả truy vấn toán tử Boolean trên Google Scholar</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading">✨ 3. Sản phẩm cuối cùng: Bảng thẩm định 12 nguồn tài liệu chuẩn Harvard</h2>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">
+            Toàn bộ 12 tài liệu (6 bài báo khoa học, 4 sách chuyên khảo, 1 văn bản chương trình nguồn mở, 1 luận án tiến sĩ) được thẩm định qua 5 tiêu chí: <em>Tác giả, Cơ quan xuất bản, Phương pháp nghiên cứu, Mức độ trích dẫn và Tính cập nhật</em>. Bạn có thể gõ từ khóa để lọc nhanh bên dưới:
+          </p>
+          <input type="text" class="search-box" id="sourceSearchInput" onkeyup="filterSourcesTable()" placeholder="🔎 Tìm nhanh theo tên tác giả, năm, loại nguồn hoặc hạng (ví dụ: Bauer, 2022, Hạng A, NUAE)..." />
+
+          <div class="table-wrap">
+            <table id="sourcesTable">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Tài liệu (Tác giả, Năm)</th>
+                  <th>Loại nguồn</th>
+                  <th>Tiêu chí thẩm định cốt lõi</th>
+                  <th>Ưu / Nhược điểm chính</th>
+                  <th>Xếp hạng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><strong>Bauer, W. I. (2020)</strong><br/><small>Music Learning Today (Oxford Univ. Press)</small></td>
+                  <td>Sách chuyên khảo</td>
+                  <td>GS ĐH Florida; khung TPACK; &gt;650 trích dẫn; tái bản lần 2.</td>
+                  <td>Hệ thống toàn diện 3 hoạt động âm nhạc; bối cảnh thiết bị Bắc Mỹ.</td>
+                  <td><span class="rank-a">Hạng A</span></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><strong>Bộ Giáo dục &amp; Đào tạo (2018)</strong><br/><small>Thông tư 32/2018/TT-BGDĐT</small></td>
+                  <td>Nguồn mở chính thống</td>
+                  <td>Cơ quan quản lý nhà nước; tiếp cận năng lực; đang có hiệu lực.</td>
+                  <td>Tính pháp lý chuẩn xác; văn bản khung nên chưa đi sâu phần mềm.</td>
+                  <td><span class="rank-a">Hạng A</span></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><strong>Burnard &amp; Finney (2007)</strong><br/><small>Music Education with Digital Technology</small></td>
+                  <td>Sách chuyên khảo</td>
+                  <td>Học giả ĐH Cambridge; NXB Continuum; &gt;420 trích dẫn.</td>
+                  <td>Nền tảng lý luận sáng tạo số sâu sắc; ví dụ phần mềm đã cũ.</td>
+                  <td><span class="rank-b">Hạng B</span></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><strong>Crawford, R. (2017)</strong><br/><small>Music Education Research, 19(2)</small></td>
+                  <td>Bài báo quốc tế</td>
+                  <td>ĐH Monash (Úc); tạp chí Scopus Q1; thực nghiệm hỗn hợp; &gt;210 trích dẫn.</td>
+                  <td>Bằng chứng thực nghiệm Blended Learning rõ; mẫu tập trung đô thị.</td>
+                  <td><span class="rank-a">Hạng A</span></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><strong>Dorfman, J. (2016)</strong><br/><small>Journal of Research in Music Education</small></td>
+                  <td>Bài báo quốc tế</td>
+                  <td>Tạp chí đầu ngành NAfME (JRME); thống kê đa biến; &gt;145 trích dẫn.</td>
+                  <td>Chỉ rõ rào cản lớp học 1:1; dữ liệu khảo sát trước năm 2020.</td>
+                  <td><span class="rank-a">Hạng A</span></td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><strong>Hoàng Long &amp; Hoàng Lân (2005)</strong><br/><small>Phương pháp dạy học âm nhạc (NXB ĐHSP)</small></td>
+                  <td>Sách chuyên khảo</td>
+                  <td>Tác giả gạo cội; giáo trình nền tảng chuẩn tại Việt Nam.</td>
+                  <td>Chuẩn hóa nguyên tắc dạy học bộ môn; chưa có nội dung chuyển đổi số.</td>
+                  <td><span class="rank-b">Hạng B</span></td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td><strong>Lê Vinh Hưng (2023)</strong><br/><small>Tạp chí Giáo dục, 23(14)</small></td>
+                  <td>Bài báo trong nước</td>
+                  <td>Tạp chí của Bộ GD&amp;ĐT; phân tích quy trình dạy học trải nghiệm.</td>
+                  <td>Bám sát chương trình 2018, tính thời sự cao; chưa có số liệu đối chứng lớn.</td>
+                  <td><span class="rank-a">Hạng A</span></td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td><strong>Ngô Thị Nam (2021)</strong><br/><small>Tạp chí Giáo dục Nghệ thuật, (36)</small></td>
+                  <td>Tạp chí chuyên ngành</td>
+                  <td>Chuyên gia đầu ngành tại ĐHSP Nghệ thuật Trung ương; bình duyệt uy tín.</td>
+                  <td>Định hướng phát triển năng lực thẩm mỹ rõ; dung lượng ngắn (5 trang).</td>
+                  <td><span class="rank-a">Hạng A</span></td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td><strong>Nguyễn Thị Tố Mai (2022)</strong><br/><small>Luận án Tiến sĩ bảo vệ tại NUAE</small></td>
+                  <td>Nguồn mở rộng (Luận án)</td>
+                  <td>Bảo vệ tại ĐHSP Nghệ thuật TW; thực nghiệm đối chứng tại THCS Hà Nội.</td>
+                  <td>Dữ liệu sát thực tế phần mềm tại VN; mẫu giới hạn khu vực nội thành.</td>
+                  <td><span class="rank-b">Hạng B</span></td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td><strong>Ruthmann &amp; Mantie (2017)</strong><br/><small>Oxford Handbook of Tech &amp; Music Ed.</small></td>
+                  <td>Sách chuyên khảo</td>
+                  <td>Oxford Univ. Press; quy tụ &gt;40 học giả quốc tế; &gt;380 trích dẫn.</td>
+                  <td>Góc nhìn phê phán đa chiều về văn hóa số; thuật ngữ xã hội học sâu.</td>
+                  <td><span class="rank-a">Hạng A</span></td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td><strong>Trịnh Hoài Thu (2022)</strong><br/><small>Tạp chí Khoa học Giáo dục VN, 18(5)</small></td>
+                  <td>Bài báo trong nước</td>
+                  <td>PGS.TS tại NUAE; thực nghiệm phần mềm Encore, EarMaster.</td>
+                  <td>Gắn trực tiếp đào tạo giáo viên với phần mềm; mẫu là sinh viên sư phạm.</td>
+                  <td><span class="rank-a">Hạng A</span></td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td><strong>Waddell &amp; Williamon (2019)</strong><br/><small>Frontiers in ICT, 6(11)</small></td>
+                  <td>Bài báo quốc tế</td>
+                  <td>ĐH Âm nhạc Hoàng gia Luân Đôn; tạp chí Open Access; mẫu N = 338.</td>
+                  <td>Dữ liệu định lượng quy mô lớn; dựa trên tự báo cáo (self-report).</td>
+                  <td><span class="rank-a">Hạng A</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <details class="harvard-box">
+            <summary>
+              <span>📚 Xem đầy đủ Danh mục 12 tài liệu tham khảo (Chuẩn Harvard)</span>
+              <span>▾</span>
+            </summary>
+            <ol>
+              <li>Bauer, W. I. (2020) <em>Music Learning Today: Digital Pedagogy for Creating, Performing, and Responding to Music</em>. Tái bản lần thứ 2. New York: Oxford University Press.</li>
+              <li>Bộ Giáo dục và Đào tạo (2018) <em>Chương trình Giáo dục phổ thông môn Âm nhạc (Ban hành kèm theo Thông tư số 32/2018/TT-BGDĐT ngày 26/12/2018)</em>. Hà Nội: Bộ Giáo dục và Đào tạo.</li>
+              <li>Burnard, P. và Finney, J. (chủ biên) (2007) <em>Music Education with Digital Technology</em>. London: Continuum.</li>
+              <li>Crawford, R. (2017) ‘Rethinking teaching and learning pedagogy for education in the twenty-first century: blended learning in music education’, <em>Music Education Research</em>, 19(2), tr. 195–213.</li>
+              <li>Dorfman, J. (2016) ‘Music teachers’ experiences in one-to-one computing environments’, <em>Journal of Research in Music Education</em>, 64(2), tr. 159–178.</li>
+              <li>Hoàng Long và Hoàng Lân (2005) <em>Phương pháp dạy học âm nhạc</em>. Hà Nội: Nhà xuất bản Đại học Sư phạm.</li>
+              <li>Lê Vinh Hưng (2023) ‘Tích hợp công nghệ số trong dạy học trải nghiệm âm nhạc theo Chương trình Giáo dục phổ thông 2018’, <em>Tạp chí Giáo dục</em>, 23(14), tr. 30–35.</li>
+              <li>Ngô Thị Nam (2021) ‘Đổi mới phương pháp dạy học âm nhạc ở trường phổ thông theo định hướng phát triển năng lực học sinh’, <em>Tạp chí Giáo dục Nghệ thuật</em>, (36), tr. 12–16.</li>
+              <li>Nguyễn Thị Tố Mai (2022) <em>Nghiên cứu ứng dụng phần mềm hỗ trợ dạy học môn Âm nhạc tại các trường trung học cơ sở khu vực nội thành Hà Nội</em>. Luận án Tiến sĩ Lý luận và Phương pháp dạy học Âm nhạc. Trường Đại học Sư phạm Nghệ thuật Trung ương.</li>
+              <li>Ruthmann, S. A. và Mantie, R. (chủ biên) (2017) <em>The Oxford Handbook of Technology and Music Education</em>. New York: Oxford University Press.</li>
+              <li>Trịnh Hoài Thu (2022) ‘Ứng dụng phần mềm âm nhạc trong giảng dạy phân môn Lý thuyết âm nhạc và Ký xướng âm tại các trường sư phạm’, <em>Tạp chí Khoa học Giáo dục Việt Nam</em>, 18(5), tr. 45–50.</li>
+              <li>Waddell, G. và Williamon, A. (2019) ‘Technology use and attitudes in music learning’, <em>Frontiers in ICT</em>, 6, bài số 11, tr. 1–14.</li>
+            </ol>
+          </details>
+        </div>
+
+        <div class="exercise-nav-footer">
+          <button class="btn-pearl" onclick="navigateTo('bai-1')">← Bài tập 1</button>
+          <button class="btn-pearl" onclick="navigateTo('projects')">Danh mục Dự án</button>
+          <button class="btn-dreamy" onclick="navigateTo('bai-3')">Sang Bài tập 3 →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PAGE 5: BÀI TẬP 3 ==================== -->
+    <section id="page-bai-3" class="page-view">
+      <div class="pdf-cinema-card">
+        <div class="pdf-cinema-header">
+          <div class="pdf-cinema-title">
+            <span style="font-size: 1.8rem;">📄</span>
+            <div>
+              <h3>Trình Chiếu Bản PDF Báo Cáo Gốc — Bài Tập 3</h3>
+              <p>Kỹ thuật thiết kế Prompt hiệu quả cho tác vụ học tập • Hoàng Phi Nhung</p>
+            </div>
+          </div>
+          <div class="pdf-controls">
+            <button class="btn-pearl" onclick="togglePdfSize('pdf-frame-3')">↕️ Mở rộng / Thu gọn khung chiếu</button>
+            <a href="https://drive.google.com/file/d/1NkEPSj-qk0C6-TvEMcRbr4VMluV4G1Gt/view?usp=sharing" target="_blank" rel="noopener" class="btn-pearl">↗ Mở tab mới</a>
+          </div>
+        </div>
+        <div class="pdf-frame-wrap" id="pdf-frame-3">
+          <iframe src="https://drive.google.com/file/d/1NkEPSj-qk0C6-TvEMcRbr4VMluV4G1Gt/preview" allow="autoplay" title="Báo cáo gốc Bài tập 3"></iframe>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <span class="pill-tag">Chương 3: Tổng quan về trí tuệ nhân tạo • Bài tập 3 (Mục 3.4)</span>
+        <h1 class="hero-title" style="font-size: 2.1rem;">Viết Prompt Hiệu Quả Cho Các Tác Vụ Học Tập</h1>
+        <p style="color: var(--text-muted); margin-bottom: 22px;">
+          Thử nghiệm thực chứng trên ChatGPT (GPT-4o) qua 3 cấp độ câu lệnh cho 3 tác vụ nhận thức cốt lõi của sinh viên Sư phạm Âm nhạc.
+        </p>
+
+        <div class="section-block">
+          <h2 class="section-heading">🎯 1. Mục tiêu bài tập</h2>
+          <div class="sub-panel">
+            <p>
+              Hiểu rõ cơ chế xác suất của mô hình ngôn ngữ lớn (LLM) để không còn đặt những câu lệnh chung chung kiểu “hỏi cho có”.
+              Mình thực hành nâng cấp từng bước từ <strong>Prompt cơ bản → Prompt cải tiến → Prompt nâng cao</strong> (áp dụng
+              <em>Role Prompting, Chain-of-Thought, Scaffolding Analogy, Bloom's Taxonomy</em> và <em>Few-shot Examples</em>) nhằm
+              biến AI thành trợ giảng chuyên ngành chuẩn xác về thuật ngữ âm nhạc.
+            </p>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading">🛠️ 2. Tóm tắt quá trình thử nghiệm &amp; So sánh tương tác 3 tác vụ</h2>
+          <p style="font-size: 0.92rem; margin-bottom: 14px;">
+            <strong>Công cụ sử dụng:</strong> ChatGPT (GPT-4o) dùng để kiểm thử độ biến thiên chất lượng đầu ra.
+            <strong>Thách thức &amp; cách xử lý:</strong> Khi giải thích khái niệm hòa âm (<em>chuyển điệu</em>) hay tạo đề <em>Lịch sử Âm nhạc Việt Nam</em>,
+            AI thường giải thích hàn lâm khô cứng hoặc tự bịa mốc thời gian. Mình đã khắc phục bằng cách thêm ràng buộc biên
+            (<em>“không suy diễn ngoài văn bản gốc”</em>, <em>“tự kiểm chứng mốc năm sáng tác trước khi xuất câu hỏi”</em>) và cung cấp khuôn mẫu đầu ra cụ thể.
+          </p>
+
+          <!-- Interactive Task Switcher -->
+          <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchPromptTask(1, this)">📚 Tác vụ 1: Tóm tắt tài liệu học thuật</button>
+            <button class="tab-btn" onclick="switchPromptTask(2, this)">🎼 Tác vụ 2: Giải thích Chuyển điệu hòa âm</button>
+            <button class="tab-btn" onclick="switchPromptTask(3, this)">📝 Tác vụ 3: Tạo đề ôn tập Tân nhạc VN</button>
+          </div>
+
+          <!-- Task 1 Content -->
+          <div id="prompt-task-1" class="prompt-task-panel">
+            <div class="prompt-tier">
+              <strong>Phiên bản 1 – Prompt cơ bản (Hiệu quả: Thấp):</strong>
+              <div class="prompt-code">“Hãy tóm tắt bài báo khoa học về ứng dụng công nghệ số và dạy học kết hợp trong môn Âm nhạc ở trường phổ thông dưới đây cho tôi.”</div>
+              <small style="color: var(--text-muted);">👉 Nhận xét: Trả về đoạn văn xuôi dàn trải ~150 từ, bỏ sót hoàn toàn cỡ mẫu thực nghiệm và tên phần mềm ký âm.</small>
+            </div>
+            <div class="prompt-tier">
+              <strong>Phiên bản 2 – Prompt cải tiến (Hiệu quả: Trung bình – Khá):</strong>
+              <div class="prompt-code">“Bạn hãy tóm tắt bài báo khoa học dưới đây dành cho sinh viên ngành Sư phạm Âm nhạc. Trình bày kết quả theo 4 mục rõ ràng: (1) Mục tiêu nghiên cứu, (2) Phương pháp và đối tượng khảo sát, (3) Kết quả chính kèm số liệu nổi bật, và (4) Ý nghĩa ứng dụng vào giảng dạy môn Âm nhạc ở trường THCS. Độ dài khoảng 250-300 từ, văn phong học thuật.”</div>
+              <small style="color: var(--text-muted);">👉 Nhận xét: Bố cục rõ ràng hơn nhưng phần vận dụng sư phạm vẫn còn khái quát.</small>
+            </div>
+            <div class="prompt-tier highlight">
+              <strong>Phiên bản 3 – Prompt nâng cao [Role + Chain-of-Thought 3 bước + Few-shot] (Hiệu quả: Rất cao):</strong>
+              <div class="prompt-code">“Hãy đóng vai một giảng viên chuyên ngành Lý luận và Phương pháp dạy học Âm nhạc... Trước khi viết bản tóm tắt cuối cùng, hãy thực hiện quy trình tư duy 3 bước (Chain-of-Thought): Bước 1, xác định vấn đề sư phạm cốt lõi; Bước 2, đối chiếu quy mô mẫu thực nghiệm với chỉ số đo lường năng lực; Bước 3, rút ra bài học thực tiễn cho giáo viên âm nhạc phổ thông Việt Nam. Trình bày theo khuôn mẫu Few-shot 4 dòng và không suy diễn ngoài văn bản gốc.”</div>
+              <small style="color: var(--berry-primary); font-weight: 700;">👉 Kết quả: Cô đọng vượt trội, giữ nguyên thuật ngữ âm nhạc học và gợi ý thẳng vào giờ dạy Hát, Nhạc cụ, Đọc nhạc.</small>
+            </div>
+          </div>
+
+          <!-- Task 2 Content -->
+          <div id="prompt-task-2" class="prompt-task-panel" style="display: none;">
+            <div class="prompt-tier">
+              <strong>Phiên bản 1 – Prompt cơ bản (Hiệu quả: Thấp):</strong>
+              <div class="prompt-code">“Giải thích khái niệm chuyển điệu trong hòa âm là gì?”</div>
+              <small style="color: var(--text-muted);">👉 Nhận xét: Định nghĩa kiểu từ điển hàn lâm, liệt kê dàn trải mọi loại chuyển điệu gây quá tải.</small>
+            </div>
+            <div class="prompt-tier">
+              <strong>Phiên bản 2 – Prompt cải tiến (Hiệu quả: Trung bình – Khá):</strong>
+              <div class="prompt-code">“Hãy giải thích khái niệm chuyển điệu sang giọng họ hàng gần trong hòa âm cổ điển cho sinh viên năm hai ngành Sư phạm Âm nhạc. Cấu trúc gồm: định nghĩa ngắn gọn, vai trò hợp âm chung, ví dụ từ C major sang G major và 2 lưu ý khi giảng giải.”</div>
+              <small style="color: var(--text-muted);">👉 Nhận xét: Đúng trọng tâm C trưởng sang G trưởng nhưng mối nối hợp âm vẫn khô cứng.</small>
+            </div>
+            <div class="prompt-tier highlight">
+              <strong>Phiên bản 3 – Prompt nâng cao [Role + Scaffolding Ẩn dụ + CoT 4 bước + Few-shot] (Hiệu quả: Rất cao):</strong>
+              <div class="prompt-code">“Bạn là một Giáo sư Lý thuyết Âm nhạc và Hòa âm... Hãy giải thích theo lộ trình sư phạm 3 tầng (Scaffolding): (1) Trực giác thính giác &amp; ẩn dụ bước sang căn phòng liền kề qua cánh cửa chung; (2) Cơ chế 4 bước từ C major sang G major (pivot chord → hợp âm át D7 chứa âm dẫn F# → giải quyết về G → vòng kết hoàn toàn); (3) Ví dụ mẫu C: I → vi (G: ii) → V7 → I; kèm hoạt động nghe phân biệt trên đàn piano 5 phút.”</div>
+              <small style="color: var(--berry-primary); font-weight: 700;">👉 Kết quả: Trực quan, dễ hình dung cảm giác thay đổi trung tâm điệu tính và áp dụng ngay khi thực tập sư phạm.</small>
+            </div>
+          </div>
+
+          <!-- Task 3 Content -->
+          <div id="prompt-task-3" class="prompt-task-panel" style="display: none;">
+            <div class="prompt-tier">
+              <strong>Phiên bản 1 – Prompt cơ bản (Hiệu quả: Thấp):</strong>
+              <div class="prompt-code">“Tạo cho tôi 6 câu hỏi ôn tập về Tân nhạc Việt Nam giai đoạn 1930-1954.”</div>
+              <small style="color: var(--text-muted);">👉 Nhận xét: Chỉ hỏi ghi nhớ sự kiện đơn giản, không có đáp án và giải thích.</small>
+            </div>
+            <div class="prompt-tier">
+              <strong>Phiên bản 2 – Prompt cải tiến (Hiệu quả: Trung bình – Khá):</strong>
+              <div class="prompt-code">“Hãy soạn bộ 6 câu hỏi ôn tập (4 trắc nghiệm, 2 tự luận ngắn) về Tân nhạc Việt Nam 1930–1954 dành cho sinh viên Sư phạm Âm nhạc, bao quát nhóm tiền chiến, nhạc kháng chiến và đặc điểm ngôn ngữ âm nhạc, kèm đáp án cuối bài.”</div>
+              <small style="color: var(--text-muted);">👉 Nhận xét: Cấu trúc đề cân đối nhưng thiên về thuộc lòng, thiếu phân tích vì sao phương án nhiễu sai.</small>
+            </div>
+            <div class="prompt-tier highlight">
+              <strong>Phiên bản 3 – Prompt nâng cao [Role + Thang Bloom 4 bậc + CoT tự kiểm chứng + Few-shot] (Hiệu quả: Rất cao):</strong>
+              <div class="prompt-code">“Hãy đóng vai giảng viên khảo thí Lịch sử Âm nhạc Việt Nam... Thiết kế bộ 6 câu hỏi phân bổ theo 4 bậc Bloom: 2 Nhận biết, 2 Thông hiểu, 1 Vận dụng, 1 Phân tích. Trước khi xuất mỗi câu, tự kiểm tra chính xác mốc thời gian, tác giả, tác phẩm. Mỗi câu trắc nghiệm kèm mục Phân tích chuyên môn chỉ rõ điểm sai của ít nhất 2 phương án nhiễu; câu tự luận kèm biểu điểm 3 ý cốt lõi.”</div>
+              <small style="color: var(--berry-primary); font-weight: 700;">👉 Kết quả: Phân hóa năng lực rõ nét, biến bộ đề thành tài liệu tự học có phản hồi học thuật sâu.</small>
+            </div>
+          </div>
+
+          <div class="figure-grid">
+            <div class="figure-card" onclick="openLightbox('Hình 14.jpg', 'Hình 14: Minh họa kết quả thử nghiệm Prompt nâng cao cho Tác vụ 1 trên công cụ AI')">
+              <img src="Hình 14.jpg" alt="Hình 14" />
+              <div class="figure-caption">Hình 14: Kết quả Prompt nâng cao – Tác vụ 1</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 15.jpg', 'Hình 15: Minh họa kết quả thử nghiệm Prompt nâng cao cho Tác vụ 2 trên công cụ AI')">
+              <img src="Hình 15.jpg" alt="Hình 15" />
+              <div class="figure-caption">Hình 15: Kết quả Prompt nâng cao – Tác vụ 2</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 16.jpg', 'Hình 16: Minh họa kết quả thử nghiệm Prompt nâng cao cho Tác vụ 3 trên công cụ AI')">
+              <img src="Hình 16.jpg" alt="Hình 16" />
+              <div class="figure-caption">Hình 16: Kết quả Prompt nâng cao – Tác vụ 3</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading">✨ 3. Sản phẩm cuối cùng: Bộ 5 nguyên tắc vàng R – C – T – F – E</h2>
+          <div class="grid-3">
+            <div class="sub-panel">
+              <h4>🎭 R – Role (Định vị vai trò)</h4>
+              <p style="font-size: 0.88rem;">Gán danh tính học thuật cụ thể (Giáo sư Hòa âm, Giảng viên Phương pháp dạy học Âm nhạc) để thu hẹp không gian xác suất ngữ nghĩa.</p>
+            </div>
+            <div class="sub-panel">
+              <h4>🧭 C – Context (Ngữ cảnh rõ ràng)</h4>
+              <p style="font-size: 0.88rem;">Chỉ định rõ đối tượng (sinh viên năm hai Sư phạm Âm nhạc kiến tập THCS theo Chương trình GDPT 2018).</p>
+            </div>
+            <div class="sub-panel">
+              <h4>⛓️ T – Task &amp; CoT (Chuỗi tư duy)</h4>
+              <p style="font-size: 0.88rem;">Phân rã tác vụ thành 3–4 bước suy luận tuần tự giúp AI xử lý logic nhân quả, giảm hẳn hiện tượng “ảo giác thông tin”.</p>
+            </div>
+            <div class="sub-panel">
+              <h4>📐 F – Few-shot Formatting</h4>
+              <p style="font-size: 0.88rem;">Cung cấp sẵn khuôn mẫu một mục hoàn chỉnh để AI sao chép cấu trúc đồng đều cho toàn bộ kết quả.</p>
+            </div>
+            <div class="sub-panel">
+              <h4>🛡️ E – Evaluation &amp; Constraints</h4>
+              <p style="font-size: 0.88rem;">Đặt ràng buộc kiểm chứng mốc thời gian, thuật ngữ âm nhạc và tinh chỉnh lặp lại thay vì dùng ngay bản nháp đầu.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise-nav-footer">
+          <button class="btn-pearl" onclick="navigateTo('bai-2')">← Bài tập 2</button>
+          <button class="btn-pearl" onclick="navigateTo('projects')">Danh mục Dự án</button>
+          <button class="btn-dreamy" onclick="navigateTo('bai-4')">Sang Bài tập 4 →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PAGE 6: BÀI TẬP 4 ==================== -->
+    <section id="page-bai-4" class="page-view">
+      <div class="pdf-cinema-card">
+        <div class="pdf-cinema-header">
+          <div class="pdf-cinema-title">
+            <span style="font-size: 1.8rem;">📄</span>
+            <div>
+              <h3>Trình Chiếu Bản PDF Báo Cáo Gốc — Bài Tập 4</h3>
+              <p>Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm • Hoàng Phi Nhung</p>
+            </div>
+          </div>
+          <div class="pdf-controls">
+            <button class="btn-pearl" onclick="togglePdfSize('pdf-frame-4')">↕️ Mở rộng / Thu gọn khung chiếu</button>
+            <a href="https://drive.google.com/file/d/1-YpcuDXsV_TmKMXD9xbwVGBaGMHHWrhH/view?usp=sharing" target="_blank" rel="noopener" class="btn-pearl">↗ Mở tab mới</a>
+          </div>
+        </div>
+        <div class="pdf-frame-wrap" id="pdf-frame-4">
+          <iframe src="https://drive.google.com/file/d/1-YpcuDXsV_TmKMXD9xbwVGBaGMHHWrhH/preview" allow="autoplay" title="Báo cáo gốc Bài tập 4"></iframe>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <span class="pill-tag">Chương 4: Giao tiếp và hợp tác trong môi trường số • Bài tập 4 (Mục 4.4)</span>
+        <h1 class="hero-title" style="font-size: 2.1rem;">Sử Dụng Công Cụ Hợp Tác Trực Tuyến Cho Dự Án Nhóm</h1>
+        <p style="color: var(--text-muted); margin-bottom: 22px;">
+          Dự án 01 tuần: <strong>“Xây dựng bộ học liệu số hỗ trợ dạy học môn Âm nhạc cấp Trung học cơ sở (Lớp 7)”</strong>.
+        </p>
+
+        <div class="section-block">
+          <h2 class="section-heading">🎯 1. Mục tiêu bài tập</h2>
+          <div class="sub-panel">
+            <p>
+              Vận hành đồng bộ 04 nhóm công cụ hợp tác trực tuyến (Quản lý dự án, Soạn thảo cộng tác, Lưu trữ đám mây, Giao tiếp nhóm)
+              để phối hợp hiệu quả trong thời gian ngắn (07 ngày), đảm bảo sự khớp nối chính xác giữa kịch bản sư phạm,
+              bản ký âm, tệp âm thanh minh họa và bài giảng trình chiếu tương tác.
+            </p>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading">🛠️ 2. Tóm tắt quá trình thực hiện &amp; Giải quyết 3 thách thức nhóm</h2>
+          <ul class="step-list" style="margin-bottom: 18px;">
+            <li class="step-item">
+              <strong>Thách thức 1 – Phân tán thông tin &amp; trôi hạn chót trên chat:</strong> Hai ngày đầu nhóm hay giao việc trực tiếp qua tin nhắn khiến yêu cầu dễ bị trôi.
+              <em>Giải pháp:</em> Áp dụng quy tắc <strong>“Trao đổi nhanh trên Zalo – Chốt nhiệm vụ trên ClickUp”</strong>, gom toàn bộ 15 đầu việc vào 1 không gian duy nhất <code>DuAn_HocLieuSo_AmNhac_Nhom</code> và ghim link lên đầu nhóm Zalo.
+            </li>
+            <li class="step-item">
+              <strong>Thách thức 2 – Xung đột phiên bản &amp; đặt tên tệp tự phát:</strong> Xuất hiện các tên tệp rời rạc như <code>BanNhac1</code> hoặc sửa đè văn bản của nhau.
+              <em>Giải pháp:</em> Chuẩn hóa cây thư mục 4 nhánh tại <code>/NMCNS</code> trên Google Drive theo quy tắc <code>NMCNS_02_HocLieu_TaiLieu_HoangPhiNhung</code>, phân tách quyền Editor/Viewer và bật chế độ <em>Suggesting</em> khi góp ý trên Google Docs.
+            </li>
+            <li class="step-item">
+              <strong>Thách thức 3 – Áp lực kiểm duyệt chuyên môn cuối kỳ:</strong> Học liệu âm nhạc cần khớp giữa bản ký âm và tệp âm thanh.
+              <em>Giải pháp:</em> Thiết kế hạn chót cuốn chiếu trên ClickUp: hoàn tất Giai đoạn 2 trước deadline 48 giờ, dành trọn 02 ngày cuối cho Giai đoạn 3 kiểm thử chéo và cập nhật tiến độ 4 lần/tuần.
+            </li>
+          </ul>
+
+          <div class="figure-grid">
+            <div class="figure-card" onclick="openLightbox('Hình 17.jpg', 'Hình 17: Minh chứng thiết lập không gian làm việc tập trung, phân bổ 15 đầu việc và cập nhật tiến độ trên ClickUp')">
+              <img src="Hình 17.jpg" alt="Hình 17" />
+              <div class="figure-caption">Hình 17: Quản lý 15 đầu việc trên ClickUp</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 18.jpg', 'Hình 18: Minh chứng biên soạn nội dung dự án, trao đổi góp ý và theo dõi lịch sử chỉnh sửa trên Google Docs')">
+              <img src="Hình 18.jpg" alt="Hình 18" />
+              <div class="figure-caption">Hình 18: Cộng tác &amp; Suggesting trên Google Docs</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 19.jpg', 'Hình 19: Minh chứng tổ chức hệ thống thư mục nhiều cấp tại /NMCNS, chuẩn hóa tên tệp và phân quyền trên Google Drive')">
+              <img src="Hình 19.jpg" alt="Hình 19" />
+              <div class="figure-caption">Hình 19: Cây thư mục /NMCNS trên Google Drive</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 20.jpg', 'Hình 20: Minh chứng phối hợp điều hành công việc và tương tác tích cực trên ứng dụng Zalo')">
+              <img src="Hình 20.jpg" alt="Hình 20" />
+              <div class="figure-caption">Hình 20: Điều phối &amp; ghim thông báo trên Zalo</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading">✨ 3. Sản phẩm cuối cùng: Bảng tổng hợp vận hành 04 công cụ</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Công cụ</th>
+                  <th>Nhiệm vụ cá nhân thực hiện</th>
+                  <th>Tính năng tối ưu hóa áp dụng</th>
+                  <th>Hiệu quả mang lại cho nhóm</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>ClickUp</strong></td>
+                  <td>Khởi tạo Space <code>DuAn_HocLieuSo_AmNhac_Nhom</code>, chia 15 tasks qua 3 giai đoạn, cập nhật 4 lần/tuần.</td>
+                  <td>Nhãn phân loại (KeHoach, NoiDung, ThietKe, KyThuat, MinhChung), luồng 4 trạng thái &amp; Calendar view.</td>
+                  <td>Kiểm soát trực quan tiến độ theo thời gian thực, loại bỏ dồn việc cuối tuần.</td>
+                </tr>
+                <tr>
+                  <td><strong>Google Docs</strong></td>
+                  <td>Chủ trì biên soạn kịch bản sư phạm âm nhạc lớp 7, rà soát chéo thuật ngữ chuyên ngành.</td>
+                  <td>Chế độ Đề xuất sửa đổi (Suggesting), Bình luận gắn thẻ (Commenting) &amp; Version History.</td>
+                  <td>Đồng bộ nội dung tức thì, minh bạch đóng góp cá nhân và bảo toàn bản thảo gốc.</td>
+                </tr>
+                <tr>
+                  <td><strong>Google Drive</strong></td>
+                  <td>Thiết lập 4 thư mục con tại <code>/NMCNS</code>, tạo đủ 3 định dạng Docs/Sheets/Slides và phân quyền.</td>
+                  <td>Quy ước đặt tên chuẩn 100%, phân quyền Người chỉnh sửa (Editor) &amp; Người xem (Viewer).</td>
+                  <td>Truy xuất tài liệu tức thì, chống xóa nhầm và tránh xung đột phiên bản.</td>
+                </tr>
+                <tr>
+                  <td><strong>Zalo</strong></td>
+                  <td>Điều phối lịch họp, nhắc mốc hạn chót và hỗ trợ giải đáp vướng mắc (&gt;12 lượt/tuần).</td>
+                  <td>Ghim tin nhắn liên kết ClickUp &amp; Drive, phản hồi trực tiếp theo từng đầu mục.</td>
+                  <td>Rút ngắn thời gian chờ đợi, duy trì nhịp độ kết nối liên tục của cả 5 thành viên.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="exercise-nav-footer">
+          <button class="btn-pearl" onclick="navigateTo('bai-3')">← Bài tập 3</button>
+          <button class="btn-pearl" onclick="navigateTo('projects')">Danh mục Dự án</button>
+          <button class="btn-dreamy" onclick="navigateTo('bai-5')">Sang Bài tập 5 →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PAGE 7: BÀI TẬP 5 ==================== -->
+    <section id="page-bai-5" class="page-view">
+      <div class="pdf-cinema-card">
+        <div class="pdf-cinema-header">
+          <div class="pdf-cinema-title">
+            <span style="font-size: 1.8rem;">📄</span>
+            <div>
+              <h3>Trình Chiếu Bản PDF Báo Cáo Gốc — Bài Tập 5</h3>
+              <p>Sử dụng AI tạo sinh hỗ trợ sáng tạo Infographic “Thanh Âm Đất Việt” • Hoàng Phi Nhung</p>
+            </div>
+          </div>
+          <div class="pdf-controls">
+            <button class="btn-pearl" onclick="togglePdfSize('pdf-frame-5')">↕️ Mở rộng / Thu gọn khung chiếu</button>
+            <a href="https://drive.google.com/file/d/1hLhBboTGoJzMUuCWodB3NKnUzMuSthNc/view?usp=sharing" target="_blank" rel="noopener" class="btn-pearl">↗ Mở tab mới</a>
+          </div>
+        </div>
+        <div class="pdf-frame-wrap" id="pdf-frame-5">
+          <iframe src="https://drive.google.com/file/d/1hLhBboTGoJzMUuCWodB3NKnUzMuSthNc/preview" allow="autoplay" title="Báo cáo gốc Bài tập 5"></iframe>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <span class="pill-tag">Chương 5: Sáng tạo nội dung số • Bài tập 5 (Mục 5.4)</span>
+        <h1 class="hero-title" style="font-size: 2.1rem;">Sử Dụng AI Tạo Sinh Hỗ Trợ Sáng Tạo Nội Dung</h1>
+        <p style="color: var(--text-muted); margin-bottom: 22px;">
+          Ấn phẩm Infographic giáo dục: <strong>“Thanh Âm Đất Việt: Giải Mã Bản Sắc Qua Nguyên Lý Phát Âm”</strong> (4 họ nhạc cụ dân tộc Việt Nam).
+        </p>
+
+        <div class="section-block">
+          <h2 class="section-heading">🎯 1. Mục tiêu bài tập</h2>
+          <div class="sub-panel">
+            <p>
+              Phối hợp chuỗi 03 công cụ AI tạo sinh (<strong>Google Gemini – DALL-E – Canva AI</strong>) để thiết kế một ấn phẩm infographic
+              trực quan giúp học sinh phổ thông phân biệt nhanh 4 họ nhạc cụ dân tộc Việt Nam theo hệ thống âm nhạc học Hornbostel–Sachs
+              (<em>Họ Hơi, Họ Dây, Họ Màng rung, Họ Tự thân vang</em>), đồng thời giữ vững vai trò chủ thể điều phối sáng tạo của con người.
+            </p>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading">🛠️ 2. Quy trình phối hợp 3 công cụ AI &amp; Quá trình hiệu đính</h2>
+          <div class="grid-3" style="margin-bottom: 16px;">
+            <div class="sub-panel">
+              <h4>1️⃣ Google Gemini (Văn bản)</h4>
+              <p style="font-size: 0.88rem;">
+                Dùng 2 vòng prompt để lập khung 4 phần và rút gọn mô tả mỗi họ nhạc cụ xuống dưới 35 từ.
+                <strong>Tự hiệu đính:</strong> Sửa lỗi AI nhầm cơ chế kích âm đàn bầu (bổ sung kỹ thuật dùng que gảy kết hợp cần đàn tạo âm bồi) và cắt giảm 40% từ thừa.
+              </p>
+            </div>
+            <div class="sub-panel">
+              <h4>2️⃣ DALL-E (Minh họa nghệ thuật)</h4>
+              <p style="font-size: 0.88rem;">
+                Tạo minh họa đàn tranh, đàn bầu, sáo trúc, trống cơm phong cách màu nước kết hợp vector phẳng.
+                <strong>Tự hiệu đính:</strong> Loại bỏ ảnh vẽ sai số trục dây đàn tranh hoặc cong sai tỷ lệ cần đàn bầu, tách nền thủ công và cân màu.
+              </p>
+            </div>
+            <div class="sub-panel">
+              <h4>3️⃣ Canva AI (Bố cục &amp; Dàn trang)</h4>
+              <p style="font-size: 0.88rem;">
+                Dùng Magic Design, Background Remover và Brand Color Match.
+                <strong>Tự hiệu đính:</strong> Gỡ bỏ khung lưới 4 ô cứng nhắc của AI, thiết kế lại trục dẫn thị giác hình chữ S mềm mại như dải lụa và khuông nhạc.
+              </p>
+            </div>
+          </div>
+
+          <!-- Contribution Ratio Meter -->
+          <div class="sub-panel" style="margin-bottom: 18px;">
+            <h4 style="margin-bottom: 4px;">⚖️ Tỷ trọng đóng góp trong sản phẩm hoàn thiện (Kiểm soát chất lượng &amp; đạo đức sáng tạo)</h4>
+            <div class="ratio-bar">
+              <div class="ratio-ai" style="width: 40%;">40% AI Tạo sinh (Phác thảo thô)</div>
+              <div class="ratio-human" style="width: 60%;">60% Sinh viên (Thẩm định âm nhạc học, biên tập &amp; thiết kế)</div>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              AI giúp vượt qua rào cản “trang giấy trắng” và tiết kiệm thao tác kỹ thuật, nhưng tính chính xác văn hóa bản địa và linh hồn sư phạm hoàn toàn do con người kiến tạo.
+            </p>
+          </div>
+
+          <div class="table-wrap" style="margin-bottom: 18px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Công cụ AI</th>
+                  <th>Vai trò trong dự án</th>
+                  <th>Điểm mạnh nổi bật</th>
+                  <th>Điểm yếu cần sinh viên tự sửa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Google Gemini</strong></td>
+                  <td>Khởi tạo dàn ý, cô đọng văn bản thuyết minh.</td>
+                  <td>Xử lý ngữ liệu nhanh, tái cấu trúc theo giới hạn từ linh hoạt, tiếng Việt tự nhiên.</td>
+                  <td>Đôi khi suy diễn chưa chính xác thuật ngữ cấu tạo nhạc cụ (như đàn bầu).</td>
+                </tr>
+                <tr>
+                  <td><strong>DALL-E (ChatGPT)</strong></td>
+                  <td>Tạo hình ảnh minh họa nhạc cụ dân tộc thống nhất.</td>
+                  <td>Hiểu tốt phong cách màu nước, vector phẳng; phối màu ấm áp, giàu thẩm mỹ.</td>
+                  <td>Sai giải phẫu vật thể văn hóa (sai số trục đàn tranh, biến dạng cần đàn bầu).</td>
+                </tr>
+                <tr>
+                  <td><strong>Canva AI</strong></td>
+                  <td>Gợi ý khung bố cục, tách nền và đồng bộ bảng màu.</td>
+                  <td>Tích hợp liền mạch trong môi trường dàn trang, tách nền &amp; trích xuất màu nhanh.</td>
+                  <td>Mẫu bố cục tự động còn rập khuôn, chưa tối ưu mật độ chữ tiếng Việt có dấu.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="figure-grid">
+            <div class="figure-card" onclick="openLightbox('Hình 21.jpg', 'Hình 21: Giao diện nhập câu lệnh và kết quả phác thảo cấu trúc nội dung trên Google Gemini')">
+              <img src="Hình 21.jpg" alt="Hình 21" />
+              <div class="figure-caption">Hình 21: Phác thảo khung nội dung trên Gemini</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 22.jpg', 'Hình 22: Quá trình tinh chỉnh văn bản cô đọng cho từng phân mục infographic trên Google Gemini')">
+              <img src="Hình 22.jpg" alt="Hình 22" />
+              <div class="figure-caption">Hình 22: Cô đọng mô tả 4 họ nhạc cụ (&lt;35 từ)</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 23.jpg', 'Hình 23: Thử nghiệm câu lệnh tạo hình ảnh minh họa nhạc cụ dân tộc trên DALL-E qua ChatGPT')">
+              <img src="Hình 23.jpg" alt="Hình 23" />
+              <div class="figure-caption">Hình 23: Phác thảo bộ nhạc cụ trên DALL-E</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 24.jpg', 'Hình 24: Kết quả tinh chỉnh phong cách đồ họa và đồng bộ bảng màu minh họa trên DALL-E')">
+              <img src="Hình 24.jpg" alt="Hình 24" />
+              <div class="figure-caption">Hình 24: Tinh chỉnh cận cảnh đàn tranh &amp; sáo trúc</div>
+            </div>
+            <div class="figure-card" onclick="openLightbox('Hình 25.jpg', 'Hình 25: Quá trình sử dụng Canva AI hỗ trợ sắp xếp bố cục và tinh chỉnh các phiên bản thiết kế trung gian')">
+              <img src="Hình 25.jpg" alt="Hình 25" />
+              <div class="figure-caption">Hình 25: Dàn trang &amp; tái cấu trúc trên Canva AI</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading">✨ 3. Sản phẩm cuối cùng: Infographic “Thanh Âm Đất Việt”</h2>
+          <div class="figure-grid single-featured">
+            <div class="figure-card" onclick="openLightbox('Hình 26.jpg', 'Hình 26: Sản phẩm infographic hoàn thiện về phân loại và giá trị giáo dục của nhạc cụ dân tộc Việt Nam')">
+              <img src="Hình 26.jpg" alt="Hình 26" />
+              <div class="figure-caption">Hình 26: Ấn phẩm Infographic hoàn thiện (Khổ dọc tỷ lệ 1:2.5)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise-nav-footer">
+          <button class="btn-pearl" onclick="navigateTo('bai-4')">← Bài tập 4</button>
+          <button class="btn-pearl" onclick="navigateTo('projects')">Danh mục Dự án</button>
+          <button class="btn-dreamy" onclick="navigateTo('bai-6')">Sang Bài tập 6 →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PAGE 8: BÀI TẬP 6 ==================== -->
+    <section id="page-bai-6" class="page-view">
+      <div class="pdf-cinema-card">
+        <div class="pdf-cinema-header">
+          <div class="pdf-cinema-title">
+            <span style="font-size: 1.8rem;">📄</span>
+            <div>
+              <h3>Trình Chiếu Bản PDF Báo Cáo Gốc — Bài Tập 6</h3>
+              <p>Sử dụng AI có trách nhiệm trong học tập &amp; nghiên cứu • Hoàng Phi Nhung</p>
+            </div>
+          </div>
+          <div class="pdf-controls">
+            <button class="btn-pearl" onclick="togglePdfSize('pdf-frame-6')">↕️ Mở rộng / Thu gọn khung chiếu</button>
+            <a href="https://drive.google.com/file/d/1uci8jWzS8QhfpOdYGKbROV96E95byFZ_/view?usp=sharing" target="_blank" rel="noopener" class="btn-pearl">↗ Mở tab mới</a>
+          </div>
+        </div>
+        <div class="pdf-frame-wrap" id="pdf-frame-6">
+          <iframe src="https://drive.google.com/file/d/1uci8jWzS8QhfpOdYGKbROV96E95byFZ_/preview" allow="autoplay" title="Báo cáo gốc Bài tập 6"></iframe>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <span class="pill-tag">Chương 6: An toàn và liêm chính học thuật trong môi trường số • Bài tập 6 (Mục 6.4)</span>
+        <h1 class="hero-title" style="font-size: 2.1rem;">Sử Dụng AI Có Trách Nhiệm Trong Học Tập Và Nghiên Cứu</h1>
+        <p style="color: var(--text-muted); margin-bottom: 22px;">
+          Đối sánh chính sách học thuật, thực hành kiểm chứng chuyên môn phương pháp Dalcroze Eurhythmics và thiết lập 6 nguyên tắc vàng cá nhân.
+        </p>
+
+        <div class="section-block">
+          <h2 class="section-heading">🎯 1. Mục tiêu bài tập</h2>
+          <div class="sub-panel">
+            <p>
+              Xác định ranh giới rõ ràng giữa <em>hỗ trợ học tập hợp lý</em> và <em>gian lận học thuật</em>; đối sánh quy định liêm chính
+              của Trường ĐHSP Nghệ thuật Trung ương (NUAE) với ĐHQG Hà Nội (VNU) và ĐH Bách khoa Hà Nội (HUST); đồng thời kiểm nghiệm
+              quy trình khai báo minh bạch theo chuẩn APA 7 và xây dựng bộ nguyên tắc ứng xử đạo đức khi dùng AI.
+            </p>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading">🛠️ 2. Tóm tắt quá trình thực hiện &amp; Kiểm chứng thực tế</h2>
+          <div class="sub-panel" style="margin-bottom: 16px;">
+            <h4 style="margin-bottom: 8px;">🎹 Thực hành minh bạch với Google Gemini (2026) — Chuyên đề Dalcroze Eurhythmics</h4>
+            <p style="font-size: 0.92rem; margin-bottom: 10px;">
+              Mình dùng Google Gemini gợi ý dàn ý chuyên đề 15 phút: <em>“Vận dụng phương pháp Dalcroze Eurhythmics trong dạy học phân môn Đọc nhạc và Nhạc cụ cho học sinh Tiểu học”</em>.
+            </p>
+            <ul class="step-list">
+              <li class="step-item">
+                <strong>Lỗi chuyên môn phát hiện ở đầu ra thô của AI:</strong> AI đã gộp nhầm hệ thống nhạc cụ gõ định âm (xylophone) của phương pháp <em>Orff-Schulwerk</em> vào hoạt động khởi động cảm thụ của <em>Dalcroze Eurhythmics</em> (vốn lấy chính cơ thể người học làm nhạc cụ đầu tiên).
+              </li>
+              <li class="step-item">
+                <strong>Cách xử lý &amp; bản địa hóa (70% đóng góp cá nhân):</strong> Mình loại bỏ đàn xylophone ở bước cảm thụ, thay bằng chuỗi vận động toàn thân (bước chân theo nốt đen, chạy bước nhỏ theo móc đơn, đứng yên ở dấu lặng đen) gắn trực tiếp với bài đọc nhạc số 2 và bài hát <em>“Cộc cách tùng cheng”</em> (Âm nhạc lớp 3), kèm tuyên bố minh bạch chuẩn APA 7.
+              </li>
+            </ul>
+            <div class="ratio-bar" style="margin-top: 14px;">
+              <div class="ratio-ai" style="width: 30%;">30% Google Gemini (Gợi ý khung dàn ý)</div>
+              <div class="ratio-human" style="width: 70%;">70% Cá nhân (Sửa lỗi thuật ngữ Dalcroze &amp; thiết kế hoạt động lớp 3)</div>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tiêu chí đối sánh</th>
+                  <th>ĐHSP Nghệ thuật Trung ương (NUAE)</th>
+                  <th>Đại học Quốc gia Hà Nội (VNU)</th>
+                  <th>Đại học Bách khoa Hà Nội (HUST)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Hình thức văn bản</strong></td>
+                  <td>Lồng ghép trong Quy chế đào tạo &amp; quy định chống đạo văn, liêm chính học thuật.</td>
+                  <td>Văn bản hướng dẫn chuyên biệt (ban hành 2024) về AI tạo sinh trong đào tạo &amp; NCKH.</td>
+                  <td>Quy định phân cấp mức độ ứng dụng AI tích hợp trong đề cương chi tiết học phần.</td>
+                </tr>
+                <tr>
+                  <td><strong>Quan điểm cốt lõi</strong></td>
+                  <td>Đề cao tính nguyên bản cá nhân, kiểm soát đạo văn &amp; bản quyền sáng tạo nghệ thuật.</td>
+                  <td>Không cấm đoán cực đoan nhưng kiểm soát chặt trên nguyên tắc minh bạch &amp; trách nhiệm.</td>
+                  <td>Linh hoạt theo đặc thù môn học, nghiêm cấm dùng AI làm thay bài kiểm tra/thi.</td>
+                </tr>
+                <tr>
+                  <td><strong>Khai báo &amp; trích dẫn</strong></td>
+                  <td>Bắt buộc trích dẫn đầy đủ mọi nguồn tư liệu tham khảo bên ngoài bài viết.</td>
+                  <td>Khai báo rõ tên công cụ AI, phạm vi sử dụng và trích dẫn chuẩn mực.</td>
+                  <td>Lưu trữ nhật ký câu lệnh (prompt) và mô tả mức độ đóng góp của AI.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading">✨ 3. Sản phẩm cuối cùng: Bộ 6 nguyên tắc vàng &amp; Infographic tuyên truyền</h2>
+          <div class="grid-2" style="align-items: center;">
+            <ul class="step-list">
+              <li class="step-item"><strong>1. Chủ thể tư duy (Human-in-the-Loop):</strong> Con người luôn định hướng, phản biện và quyết định cuối cùng; đóng góp trí tuệ cá nhân chiếm ưu thế tuyệt đối.</li>
+              <li class="step-item"><strong>2. Kiểm chứng đa chiều (Fact-Checking):</strong> Đối chiếu chéo mọi thuật ngữ âm nhạc học, số liệu và trích dẫn từ AI với giáo trình chuẩn &amp; văn bản Bộ GD&amp;ĐT.</li>
+              <li class="step-item"><strong>3. Tôn trọng bản quyền (Respect IP):</strong> Không dùng AI sao chép luận điểm, bản ký âm hay tác phẩm nghệ thuật; giữ vững tính nguyên bản.</li>
+              <li class="step-item"><strong>4. Minh bạch trích dẫn (Transparency):</strong> Khai báo rõ tên công cụ AI, phiên bản, thời điểm truy cập và phạm vi hỗ trợ trong mọi bài nộp.</li>
+              <li class="step-item"><strong>5. Bảo mật dữ liệu (Data Privacy):</strong> Không tải thông tin cá nhân nhạy cảm, dữ liệu khảo sát chưa công bố hay tài liệu nội bộ lên nền tảng AI công khai.</li>
+              <li class="step-item"><strong>6. Phát triển thực chất (Skill Growth):</strong> Coi AI là trợ giảng gợi mở góc nhìn để rèn luyện chuyên môn sâu và năng lực sư phạm, không đối phó điểm số.</li>
+            </ul>
+
+            <div class="figure-card" onclick="openLightbox('Hình 27.jpg', 'Hình 27: Infographic minh họa bộ nguyên tắc sử dụng AI có trách nhiệm trong học thuật')">
+              <img src="Hình 27.jpg" alt="Hình 27" style="height: auto; max-height: 560px; object-fit: contain;" />
+              <div class="figure-caption">Hình 27: Infographic 6 Nguyên tắc sử dụng AI có trách nhiệm</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise-nav-footer">
+          <button class="btn-pearl" onclick="navigateTo('bai-5')">← Bài tập 5</button>
+          <button class="btn-pearl" onclick="navigateTo('projects')">Danh mục Dự án</button>
+          <button class="btn-dreamy" onclick="navigateTo('conclusion')">Đến trang Tổng kết →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PAGE 9: CONCLUSION ==================== -->
+    <section id="page-conclusion" class="page-view">
+      <div class="glass-card">
+        <span class="pill-tag">🌟 Tổng kết học phần • Nhìn lại chặng đường số</span>
+        <h1 class="hero-title">Cảm Nhận &amp; Đúc Kết Hành Trình Xây Dựng Portfolio</h1>
+        <p class="handwritten-sub">“Công nghệ là đôi cánh, nhưng cảm xúc nghệ thuật và tư duy sư phạm mới là nhịp đập trái tim”</p>
+
+        <div class="grid-2" style="margin-top: 20px;">
+          <div class="sub-panel">
+            <h3 style="margin-bottom: 10px;">💭 1. Trải nghiệm &amp; Cảm nhận cá nhân</h3>
+            <p style="font-size: 0.94rem; margin-bottom: 10px;">
+              Ban đầu khi nghe đến việc xây dựng một website Portfolio cá nhân tích hợp 06 bài tập cùng nhiều công cụ AI, mình từng hơi băn khoăn vì đặc thù sinh viên Sư phạm Âm nhạc vốn quen với khuông nhạc, thanh nhạc và phím đàn hơn là các quy chuẩn quản trị dữ liệu hay thiết kế web.
+            </p>
+            <p style="font-size: 0.94rem;">
+              Thế nhưng càng đi sâu qua từng tuần thực hành, mình càng thấy hứng thú. Mỗi bài tập đều được mình gắn trực tiếp vào chuyên ngành đang học — từ tìm tài liệu đổi mới dạy học âm nhạc phổ thông, dùng AI giải thích vòng chuyển điệu hòa âm, đến thiết kế infographic về nhạc cụ dân tộc Việt Nam. Nhờ vậy, học phần này trở thành một trải nghiệm rất thực tế và gần gũi với nghề giáo tương lai của mình.
+            </p>
+          </div>
+
+          <div class="sub-panel">
+            <h3 style="margin-bottom: 10px;">🎓 2. Kiến thức &amp; Kỹ năng cốt lõi tiếp thu được</h3>
+            <ul class="step-list">
+              <li class="step-item"><strong>Tư duy hệ thống hóa dữ liệu:</strong> Biết cách tổ chức cây thư mục phân tầng, đặt tên tệp chuẩn hóa và phân quyền an toàn trên cả máy tính cục bộ lẫn Google Drive.</li>
+              <li class="step-item"><strong>Kỹ năng giao tiếp với AI (Prompt Engineering):</strong> Làm chủ cấu trúc R-C-T-F-E và Chain-of-Thought để khai thác chiều sâu sư phạm thay vì nhận câu trả lời hời hợt.</li>
+              <li class="step-item"><strong>Vận hành dự án nhóm trực tuyến:</strong> Kết hợp nhịp nhàng ClickUp, Google Docs, Drive và Zalo để giữ tiến độ chung luôn minh bạch.</li>
+              <li class="step-item"><strong>Bản lĩnh liêm chính học thuật:</strong> Biết phản biện lỗi sai chuyên môn của AI và luôn giữ tỷ trọng sáng tạo cá nhân ở vị trí trung tâm.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 22px;">
+          <div class="sub-panel">
+            <h3 style="margin-bottom: 10px;">💖 3. Điểm tâm đắc nhất</h3>
+            <p style="font-size: 0.94rem;">
+              Điều khiến mình tâm đắc nhất chính là quá trình thực hiện <strong>Bài tập 5 (Infographic “Thanh Âm Đất Việt”)</strong> và thiết kế chính trang <strong>Digital Portfolio</strong> này. Khi thấy AI vẽ sai cấu tạo cần đàn bầu hay nhầm khái niệm phương pháp Dalcroze với Orff-Schulwerk ở Bài 6, mình nhận ra kiến thức chuyên môn âm nhạc học tại trường chính là “bộ lọc” quý giá nhất mà không thuật toán nào thay thế được. Việc tự tay biên tập lại từng câu chữ, hiệu đính hình ảnh và lồng ghép bản hòa tấu <em>Canon in D</em> cùng phím đàn tương tác vào Portfolio giúp sản phẩm mang trọn vẹn cá tính của một sinh viên Sư phạm Âm nhạc.
+            </p>
+          </div>
+
+          <div class="sub-panel">
+            <h3 style="margin-bottom: 10px;">🧩 4. Thách thức gặp phải &amp; Cách vượt qua</h3>
+            <p style="font-size: 0.94rem;">
+              Thách thức lớn nhất của mình là cân đối thời gian giữa lịch luyện chuyên môn trên lớp với việc chuẩn hóa đồng bộ 06 báo cáo, 27 hình ảnh minh chứng và giao diện website sao cho vừa đẹp mắt, nhiều chuyển động nhưng vẫn hiển thị mượt mà trên cả máy tính lẫn điện thoại. Mình đã áp dụng chính phương pháp chia nhỏ đầu việc và đặt mốc kiểm thử cuốn chiếu từ Bài tập 4 để rà soát từng liên kết Google Drive công khai, đảm bảo không có bất kỳ lỗi hiển thị hay liên kết hỏng nào.
+            </p>
+          </div>
+        </div>
+
+        <!-- Transparency Table of AI Tools Used -->
+        <div class="section-block" style="margin-top: 26px;">
+          <h2 class="section-heading">📜 Bảng kê minh bạch công cụ AI đã sử dụng (Tuân thủ mục IV.3)</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Công cụ AI</th>
+                  <th>Phạm vi áp dụng</th>
+                  <th>Mục đích sử dụng &amp; Vai trò kiểm soát của sinh viên</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>ChatGPT (GPT-4o &amp; DALL-E)</strong></td>
+                  <td>Bài tập 3 &amp; Bài tập 5</td>
+                  <td>Kiểm thử 9 phiên bản prompt học thuật (Bài 3); phác thảo hình minh họa nhạc cụ dân tộc (Bài 5) sau đó sinh viên tự chọn lọc, tách nền và sửa lỗi chi tiết cấu tạo nhạc cụ.</td>
+                </tr>
+                <tr>
+                  <td><strong>Google Gemini (2026)</strong></td>
+                  <td>Bài tập 5 &amp; Bài tập 6</td>
+                  <td>Gợi ý khung dàn ý infographic nhạc cụ dân tộc (Bài 5) và đề cương chuyên đề Dalcroze Eurhythmics (Bài 6); sinh viên trực tiếp hiệu đính thuật ngữ chuyên ngành (chiếm 60%–70% giá trị nội dung).</td>
+                </tr>
+                <tr>
+                  <td><strong>Canva AI</strong></td>
+                  <td>Bài tập 5 &amp; Bài tập 6</td>
+                  <td>Hỗ trợ tách nền ảnh và gợi ý bảng màu hài hòa; sinh viên tự tái cấu trúc bố cục chữ S và chuẩn hóa phông chữ tiếng Việt.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Quick Links to All 6 Completed Exercise Pages -->
+        <div class="section-block" style="margin-top: 26px;">
+          <h2 class="section-heading">🔗 Truy cập nhanh toàn bộ 06 trang bài tập đã hoàn thành</h2>
+          <div class="grid-3">
+            <button class="btn-pearl" style="justify-content: flex-start; padding: 14px 18px;" onclick="navigateTo('bai-1')">📁 Bài 1: Quản lý tệp tin &amp; thư mục</button>
+            <button class="btn-pearl" style="justify-content: flex-start; padding: 14px 18px;" onclick="navigateTo('bai-2')">🔎 Bài 2: Tìm kiếm &amp; đánh giá học thuật</button>
+            <button class="btn-pearl" style="justify-content: flex-start; padding: 14px 18px;" onclick="navigateTo('bai-3')">🪄 Bài 3: Viết Prompt hiệu quả</button>
+            <button class="btn-pearl" style="justify-content: flex-start; padding: 14px 18px;" onclick="navigateTo('bai-4')">🤝 Bài 4: Hợp tác trực tuyến dự án nhóm</button>
+            <button class="btn-pearl" style="justify-content: flex-start; padding: 14px 18px;" onclick="navigateTo('bai-5')">🎨 Bài 5: Sáng tạo nội dung bằng AI</button>
+            <button class="btn-pearl" style="justify-content: flex-start; padding: 14px 18px;" onclick="navigateTo('bai-6')">🛡️ Bài 6: Sử dụng AI có trách nhiệm</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Back to Top Button -->
+  <button class="back-to-top" id="backToTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Lên đầu trang" aria-label="Lên đầu trang">↑</button>
+
+  <!-- Floating Canon in D (Piano & Cello) Player Widget -->
+  <div class="music-widget" id="musicWidget" onclick="toggleAmbientMusic()" title="Bật / Tắt bản hòa tấu Canon in D (Piano &amp; Cello)">
+    <div class="vinyl-mini" id="vinylMini">🎻</div>
+    <div>
+      <div style="font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.84rem; color: var(--berry-deep);">
+        Canon in D • Piano &amp; Cello
+      </div>
+      <div style="font-size: 0.74rem; color: var(--text-muted);" id="musicStatusText">Nhấp để phát bản nhạc</div>
+    </div>
+    <div class="eq-bars" id="eqBars">
+      <span class="eq-bar"></span>
+      <span class="eq-bar"></span>
+      <span class="eq-bar"></span>
+      <span class="eq-bar"></span>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal for Report Figures -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Đóng ảnh">✕</button>
+      <img id="lightboxImg" src="" alt="Xem phóng to minh chứng" />
+      <p id="lightboxCaption" style="margin-top: 12px; font-weight: 700; color: var(--berry-deep);"></p>
+      <div class="lightbox-nav">
+        <button class="btn-pearl" onclick="stepLightbox(-1)">← Ảnh trước</button>
+        <button class="btn-pearl" onclick="stepLightbox(1)">Ảnh tiếp →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer (Required Student & Course Info) -->
+  <footer>
+    <p style="font-family: 'Quicksand', sans-serif; font-weight: 700; color: var(--berry-deep); font-size: 1rem; margin-bottom: 4px;">
+      🎵 Sinh viên: Hoàng Phi Nhung • MSSV: 2552210092 • Ngành/Lớp: Sư phạm Âm nhạc
+    </p>
+    <p style="color: var(--text-muted); font-size: 0.88rem;">
+      Trường Đại học Sư phạm Nghệ thuật Trung ương (NUAE) • Học phần: Nhập môn công nghệ số và ứng dụng trí tuệ nhân tạo (INF2501)
+    </p>
+  </footer>
+
+  <script>
+    // ==================== 1. SPA ROUTING & NAVIGATION ====================
+    const validPages = ['about', 'projects', 'bai-1', 'bai-2', 'bai-3', 'bai-4', 'bai-5', 'bai-6', 'conclusion'];
+
+    function navigateTo(pageId) {
+      if (!validPages.includes(pageId)) pageId = 'about';
+
+      document.querySelectorAll('.page-view').forEach(sec => sec.classList.remove('active'));
+      const target = document.getElementById('page-' + pageId);
+      if (target) target.classList.add('active');
+
+      document.querySelectorAll('.nav-btn, .dropdown-item').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.page === pageId) btn.classList.add('active');
+      });
+
+      if (pageId.startsWith('bai-')) {
+        const projBtn = document.querySelector('.nav-btn[data-page="projects"]');
+        if (projBtn) projBtn.classList.add('active');
+      }
+
+      document.getElementById('navLinks').classList.remove('mobile-open');
+      history.replaceState(null, '', '#' + pageId);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      playPianoNote(587.33, 0, 0.08, 0.9); // D5 soft chime on page switch
+      setTimeout(observeReveals, 80);
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('navLinks').classList.toggle('mobile-open');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (validPages.includes(hash)) {
+        navigateTo(hash);
+      }
+      observeReveals();
+    });
+
+    // ==================== 2. SCROLL PROGRESS, NAVBAR & REVEAL ====================
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      document.getElementById('scrollProgress').style.width = pct + '%';
+
+      const nav = document.getElementById('mainNavbar');
+      if (scrollTop > 30) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+
+      const topBtn = document.getElementById('backToTopBtn');
+      if (scrollTop > 260) topBtn.classList.add('show');
+      else topBtn.classList.remove('show');
+    });
+
+    let revealObserver = null;
+    function observeReveals() {
+      const items = document.querySelectorAll('.page-view.active .reveal-item, .page-view.active .section-block');
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('visible'));
+        return;
+      }
+      if (revealObserver) revealObserver.disconnect();
+      revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.08 });
+
+      items.forEach(el => {
+        el.classList.add('reveal-item');
+        revealObserver.observe(el);
+      });
+    }
+
+    // ==================== 3. 3D TILT INTERACTION ON PROJECT CARDS ====================
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(900px) rotateX(${(-y * 7).toFixed(2)}deg) rotateY(${(x * 7).toFixed(2)}deg) translateY(-6px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    // ==================== 4. PDF VIEWER EXPAND/COLLAPSE ====================
+    function togglePdfSize(frameId) {
+      const el = document.getElementById(frameId);
+      if (!el) return;
+      el.classList.toggle('expanded');
+    }
+
+    // ==================== 5. PROMPT TABS (BÀI 3) ====================
+    function switchPromptTask(taskNum, btnEl) {
+      document.querySelectorAll('.prompt-task-panel').forEach(p => p.style.display = 'none');
+      document.getElementById('prompt-task-' + taskNum).style.display = 'block';
+
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      playPianoNote(739.99, 0, 0.07, 0.8); // F#5
+    }
+
+    // ==================== 6. TABLE SEARCH FILTER (BÀI 2) ====================
+    function filterSourcesTable() {
+      const filter = document.getElementById('sourceSearchInput').value.toLowerCase();
+      const rows = document.querySelectorAll('#sourcesTable tbody tr');
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? '' : 'none';
+      });
+    }
+
+    // ==================== 7. LIGHTBOX MODAL WITH PREV/NEXT ====================
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    function openLightbox(src, caption) {
+      const activePage = document.querySelector('.page-view.active');
+      currentGallery = Array.from(activePage.querySelectorAll('.figure-card')).map(card => ({
+        src: card.querySelector('img').getAttribute('src'),
+        caption: card.querySelector('.figure-caption').textContent
+      }));
+      currentIndex = currentGallery.findIndex(item => item.src === src);
+      if (currentIndex < 0) currentIndex = 0;
+
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightboxCaption').textContent = caption;
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    function stepLightbox(dir) {
+      if (!currentGallery.length) return;
+      currentIndex = (currentIndex + dir + currentGallery.length) % currentGallery.length;
+      const item = currentGallery[currentIndex];
+      document.getElementById('lightboxImg').src = item.src;
+      document.getElementById('lightboxCaption').textContent = item.caption;
+    }
+
+    function closeLightbox(e) {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const lb = document.getElementById('lightbox');
+      if (lb.classList.contains('open')) {
+        if (e.key === 'Escape') closeLightbox(e);
+        if (e.key === 'ArrowRight') stepLightbox(1);
+        if (e.key === 'ArrowLeft') stepLightbox(-1);
+      }
+    });
+
+    // ==================== 8. WEB AUDIO API: CANON IN D (PIANO & CELLO) + MINI PIANO ====================
+    let audioCtx = null;
+    let masterBus = null;
+    let activeTimers = [];
+    let activeWelcomeTimers = [];
+
+    function getAudioEngine() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        const compressor = audioCtx.createDynamicsCompressor();
+        compressor.threshold.setValueAtTime(-16, audioCtx.currentTime);
+        compressor.ratio.setValueAtTime(3, audioCtx.currentTime);
+
+        const masterGain = audioCtx.createGain();
+        masterGain.gain.setValueAtTime(0.85, audioCtx.currentTime);
+
+        // Warm acoustic room reverb/echo
+        const delayL = audioCtx.createDelay();
+        const delayR = audioCtx.createDelay();
+        delayL.delayTime.value = 0.24;
+        delayR.delayTime.value = 0.36;
+
+        const feedback = audioCtx.createGain();
+        feedback.gain.value = 0.24;
+
+        const wetFilter = audioCtx.createBiquadFilter();
+        wetFilter.type = 'lowpass';
+        wetFilter.frequency.value = 1750;
+
+        const wetGain = audioCtx.createGain();
+        wetGain.gain.value = 0.22;
+
+        masterGain.connect(compressor);
+        masterGain.connect(delayL);
+        delayL.connect(wetFilter);
+        wetFilter.connect(feedback);
+        feedback.connect(delayR);
+        delayR.connect(wetFilter);
+        wetFilter.connect(wetGain);
+        wetGain.connect(compressor);
+
+        compressor.connect(audioCtx.destination);
+        masterBus = masterGain;
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return { ctx: audioCtx, out: masterBus };
+    }
+
+    // D Major Note Table (Hz)
+    const NOTE = {
+      F2s: 92.50, G2: 98.00, A2: 110.00, B2: 123.47,
+      C3s: 138.59, D3: 146.83, E3: 164.81, F3s: 185.00, G3: 196.00, A3: 220.00, B3: 246.94,
+      C4s: 277.18, D4: 293.66, E4: 329.63, F4s: 369.99, G4: 392.00, A4: 440.00, B4: 493.88,
+      C5s: 554.37, D5: 587.33, E5: 659.25, F5s: 739.99
+    };
+
+    // Warm Acoustic-style Grand Piano Voice
+    function playPianoNote(freq, delaySec = 0, volume = 0.14, duration = 1.65) {
+      try {
+        const { ctx, out } = getAudioEngine();
+        const t = ctx.currentTime + delaySec;
+
+        const osc1 = ctx.createOscillator();
+        const osc2 = ctx.createOscillator();
+        osc1.type = 'triangle';
+        osc2.type = 'sine';
+        osc1.frequency.setValueAtTime(freq, t);
+        osc2.frequency.setValueAtTime(freq * 2, t); // harmonic shimmer
+
+        const subGain = ctx.createGain();
+        subGain.gain.setValueAtTime(freq < 140 ? 0.38 : 0.2, t);
+
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(Math.min(freq * 5.2, 3400), t);
+        filter.frequency.exponentialRampToValueAtTime(Math.max(freq * 1.5, 320), t + duration * 0.85);
+
+        const env = ctx.createGain();
+        env.gain.setValueAtTime(0.0001, t);
+        env.gain.linearRampToValueAtTime(volume, t + 0.014);
+        env.gain.exponentialRampToValueAtTime(volume * 0.42, t + 0.35);
+        env.gain.exponentialRampToValueAtTime(0.0001, t + duration);
+
+        osc1.connect(filter);
+        osc2.connect(subGain);
+        subGain.connect(filter);
+        filter.connect(env);
+        env.connect(out);
+
+        osc1.start(t);
+        osc2.start(t);
+        osc1.stop(t + duration + 0.05);
+        osc2.stop(t + duration + 0.05);
+      } catch (err) {}
+    }
+
+    // Expressive Bowed Cello Voice with Warm Vibrato
+    function playCelloNote(freq, delaySec = 0, volume = 0.13, duration = 1.6) {
+      try {
+        const { ctx, out } = getAudioEngine();
+        const t = ctx.currentTime + delaySec;
+
+        const oscSaw = ctx.createOscillator();
+        const oscTri = ctx.createOscillator();
+        oscSaw.type = 'sawtooth';
+        oscTri.type = 'triangle';
+        oscSaw.frequency.setValueAtTime(freq, t);
+        oscTri.frequency.setValueAtTime(freq, t);
+        oscSaw.detune.setValueAtTime(-3.5, t);
+        oscTri.detune.setValueAtTime(3.5, t);
+
+        // Gentle expressivo vibrato
+        const vibrato = ctx.createOscillator();
+        const vibGain = ctx.createGain();
+        vibrato.frequency.setValueAtTime(5.1, t);
+        vibGain.gain.setValueAtTime(0, t);
+        vibGain.gain.linearRampToValueAtTime(2.6, t + 0.25);
+        vibrato.connect(vibGain);
+        vibGain.connect(oscSaw.frequency);
+        vibGain.connect(oscTri.frequency);
+
+        const bodyFilter = ctx.createBiquadFilter();
+        bodyFilter.type = 'lowpass';
+        bodyFilter.Q.setValueAtTime(1.4, t);
+        bodyFilter.frequency.setValueAtTime(820, t);
+        bodyFilter.frequency.linearRampToValueAtTime(1250, t + Math.min(0.28, duration * 0.35));
+        bodyFilter.frequency.exponentialRampToValueAtTime(760, t + duration);
+
+        const sawMix = ctx.createGain();
+        sawMix.gain.value = 0.45;
+        const triMix = ctx.createGain();
+        triMix.gain.value = 0.7;
+
+        const env = ctx.createGain();
+        const attack = Math.min(0.11, duration * 0.25);
+        const releaseStart = Math.max(attack + 0.05, duration - 0.18);
+        env.gain.setValueAtTime(0.0001, t);
+        env.gain.linearRampToValueAtTime(volume, t + attack);
+        env.gain.setValueAtTime(volume * 0.92, t + releaseStart);
+        env.gain.exponentialRampToValueAtTime(0.0001, t + duration);
+
+        oscSaw.connect(sawMix);
+        oscTri.connect(triMix);
+        sawMix.connect(bodyFilter);
+        triMix.connect(bodyFilter);
+        bodyFilter.connect(env);
+        env.connect(out);
+
+        oscSaw.start(t);
+        oscTri.start(t);
+        vibrato.start(t);
+        oscSaw.stop(t + duration + 0.05);
+        oscTri.stop(t + duration + 0.05);
+        vibrato.stop(t + duration + 0.05);
+      } catch (err) {}
+    }
+
+    // Canon in D Harmonic Progression (8 chords x 4 eighth-note steps = 32 steps per cycle)
+    const CANON_STEP_MS = 415; // ~72 BPM eighth-note pulse matching the Brooklyn Duo feel
+    const CANON_PIANO_CHORDS = [
+      [NOTE.D3, NOTE.A3, NOTE.D4, NOTE.F4s],   // 0: D
+      [NOTE.A2, NOTE.E3, NOTE.A3, NOTE.C4s],   // 1: A
+      [NOTE.B2, NOTE.F3s, NOTE.B3, NOTE.D4],   // 2: Bm
+      [NOTE.F2s, NOTE.C3s, NOTE.F3s, NOTE.A3], // 3: F#m
+      [NOTE.G2, NOTE.D3, NOTE.G3, NOTE.B3],    // 4: G
+      [NOTE.D3, NOTE.A3, NOTE.D4, NOTE.F4s],   // 5: D
+      [NOTE.G2, NOTE.D3, NOTE.G3, NOTE.B3],    // 6: G
+      [NOTE.A2, NOTE.E3, NOTE.A3, NOTE.C4s]    // 7: A
+    ];
+
+    // Cello melody cycles (32 steps each; null = hold/rest)
+    const CANON_CELLO_CYCLES = [
+      // Cycle 0: Piano intro (steps 0..15), then soft Cello swell-in on steps 16..31 (G - D - G - A)
+      [
+        null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null,
+        {f:NOTE.B3, d:4},null,null,null, {f:NOTE.A3, d:4},null,null,null, {f:NOTE.B3, d:4},null,null,null, {f:NOTE.C4s, d:4},null,null,null
+      ],
+      // Cycle 1: Classic Canon Theme I (F#4 - E4 - D4 - C#4 - B3 - A3 - B3 - C#4)
+      [
+        {f:NOTE.F4s, d:4},null,null,null, {f:NOTE.E4, d:4},null,null,null,
+        {f:NOTE.D4, d:4},null,null,null,  {f:NOTE.C4s, d:4},null,null,null,
+        {f:NOTE.B3, d:4},null,null,null,  {f:NOTE.A3, d:4},null,null,null,
+        {f:NOTE.B3, d:4},null,null,null,  {f:NOTE.C4s, d:4},null,null,null
+      ],
+      // Cycle 2: Classic Canon Theme II (D4 - C#4 - B3 - A3 - G3 - F#3 - G3 - E3)
+      [
+        {f:NOTE.D4, d:4},null,null,null,  {f:NOTE.C4s, d:4},null,null,null,
+        {f:NOTE.B3, d:4},null,null,null,  {f:NOTE.A3, d:4},null,null,null,
+        {f:NOTE.G3, d:4},null,null,null,  {f:NOTE.F3s, d:4},null,null,null,
+        {f:NOTE.G3, d:4},null,null,null,  {f:NOTE.E3, d:4},null,null,null
+      ],
+      // Cycle 3: Iconic Quarter-note Singing Line
+      [
+        {f:NOTE.D4, d:2},null, {f:NOTE.F4s, d:2},null,
+        {f:NOTE.A4, d:2},null, {f:NOTE.G4, d:2},null,
+        {f:NOTE.F4s, d:2},null,{f:NOTE.D4, d:2},null,
+        {f:NOTE.F4s, d:2},null,{f:NOTE.E4, d:2},null,
+        {f:NOTE.D4, d:2},null, {f:NOTE.B3, d:2},null,
+        {f:NOTE.D4, d:2},null, {f:NOTE.A4, d:2},null,
+        {f:NOTE.G4, d:2},null, {f:NOTE.B4, d:2},null,
+        {f:NOTE.A4, d:2},null, {f:NOTE.G4, d:2},null
+      ],
+      // Cycle 4: Expressive Eighth-note Flow
+      [
+        {f:NOTE.F4s, d:1}, {f:NOTE.D4, d:1}, {f:NOTE.E4, d:1}, {f:NOTE.F4s, d:1},
+        {f:NOTE.E4, d:1},  {f:NOTE.C4s, d:1},{f:NOTE.A3, d:1}, {f:NOTE.C4s, d:1},
+        {f:NOTE.D4, d:1},  {f:NOTE.B3, d:1}, {f:NOTE.C4s, d:1},{f:NOTE.D4, d:1},
+        {f:NOTE.C4s, d:1}, {f:NOTE.F4s, d:1},{f:NOTE.A4, d:1}, {f:NOTE.F4s, d:1},
+        {f:NOTE.G4, d:1},  {f:NOTE.F4s, d:1},{f:NOTE.E4, d:1}, {f:NOTE.G4, d:1},
+        {f:NOTE.F4s, d:1}, {f:NOTE.E4, d:1}, {f:NOTE.D4, d:1}, {f:NOTE.C4s, d:1},
+        {f:NOTE.B3, d:1},  {f:NOTE.A3, d:1}, {f:NOTE.G3, d:1}, {f:NOTE.B3, d:1},
+        {f:NOTE.C4s, d:1}, {f:NOTE.E4, d:1}, {f:NOTE.A4, d:1}, {f:NOTE.G4, d:1}
+      ]
+    ];
+
+    // Interactive Mini Piano Keys
+    document.querySelectorAll('.piano-key').forEach(key => {
+      key.addEventListener('mousedown', (e) => {
+        const freq = parseFloat(key.dataset.note);
+        playPianoNote(freq, 0, 0.2, 1.4);
+        spawnBurst(e.clientX, e.clientY);
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      const k = e.key.toLowerCase();
+      const keyBtn = document.querySelector(`.piano-key[data-key="${k}"]`);
+      if (keyBtn) {
+        keyBtn.classList.add('pressed');
+        playPianoNote(parseFloat(keyBtn.dataset.note), 0, 0.2, 1.4);
+        const rect = keyBtn.getBoundingClientRect();
+        spawnBurst(rect.left + rect.width / 2, rect.top);
+        setTimeout(() => keyBtn.classList.remove('pressed'), 180);
+      }
+    });
+
+    // Welcome Button: Plays Opening Excerpt of Canon in D (Piano + Cello)
+    let isWelcomePlaying = false;
+    function stopWelcomeCanon() {
+      activeWelcomeTimers.forEach(t => clearTimeout(t));
+      activeWelcomeTimers = [];
+      isWelcomePlaying = false;
+      const btn = document.getElementById('welcomeCanonBtn');
+      if (btn) {
+        btn.classList.remove('active-playing');
+        btn.textContent = '🎻 Nghe Canon in D chào mừng';
+      }
+      if (!isPlayingMusic) {
+        document.getElementById('heroWaveBars').classList.remove('active-song');
+      }
+    }
+
+    function playWelcomeCanon() {
+      if (isWelcomePlaying) {
+        stopWelcomeCanon();
+        return;
+      }
+      isWelcomePlaying = true;
+      const btn = document.getElementById('welcomeCanonBtn');
+      btn.classList.add('active-playing');
+      btn.textContent = '⏹ Đang tấu Canon in D...';
+      document.getElementById('heroWaveBars').classList.add('active-song');
+
+      const stepMs = 380;
+      const keyButtons = document.querySelectorAll('.piano-key');
+
+      // 4-chord opening excerpt: D -> A -> Bm -> F#m -> final warm D chord
+      const welcomePiano = [
+        NOTE.D3, NOTE.A3, NOTE.D4, NOTE.F4s,
+        NOTE.A2, NOTE.E3, NOTE.A3, NOTE.C4s,
+        NOTE.B2, NOTE.F3s, NOTE.B3, NOTE.D4,
+        NOTE.F2s, NOTE.C3s, NOTE.F3s, NOTE.A3
+      ];
+      const welcomeCello = {
+        0:  { f: NOTE.F4s, d: 4, keyIdx: 4 }, // F#4
+        4:  { f: NOTE.E4,  d: 4, keyIdx: 2 }, // E4
+        8:  { f: NOTE.D4,  d: 4, keyIdx: 1 }, // D4
+        12: { f: NOTE.C4s, d: 4, keyIdx: 0 }  // C#4
+      };
+
+      welcomePiano.forEach((pFreq, idx) => {
+        const timer = setTimeout(() => {
+          playPianoNote(pFreq, 0, 0.14, 1.5);
+          if (welcomeCello[idx]) {
+            const c = welcomeCello[idx];
+            playCelloNote(c.f, 0, 0.14, (c.d * stepMs) / 1000 + 0.12);
+            const kBtn = keyButtons[c.keyIdx];
+            if (kBtn) {
+              kBtn.classList.add('pressed');
+              const r = kBtn.getBoundingClientRect();
+              spawnBurst(r.left + r.width / 2, r.top);
+              setTimeout(() => kBtn.classList.remove('pressed'), 420);
+            }
+          }
+        }, idx * stepMs);
+        activeWelcomeTimers.push(timer);
+      });
+
+      // Warm final Tonic D resolution chord
+      const endTimer = setTimeout(() => {
+        playPianoNote(NOTE.D3, 0, 0.14, 2.4);
+        playPianoNote(NOTE.A3, 0.04, 0.12, 2.4);
+        playPianoNote(NOTE.F4s, 0.08, 0.13, 2.4);
+        playCelloNote(NOTE.D4, 0.04, 0.15, 2.3);
+        const kBtn = keyButtons[1];
+        if (kBtn) {
+          kBtn.classList.add('pressed');
+          setTimeout(() => kBtn.classList.remove('pressed'), 700);
+        }
+      }, welcomePiano.length * stepMs);
+      activeWelcomeTimers.push(endTimer);
+
+      const doneTimer = setTimeout(() => {
+        stopWelcomeCanon();
+      }, (welcomePiano.length + 6) * stepMs);
+      activeWelcomeTimers.push(doneTimer);
+    }
+
+    // Floating Canon in D (Piano & Cello) Looping Background Player
+    let musicInterval = null;
+    let isPlayingMusic = false;
+    let canonStepIndex = 0;
+    let canonCycleIndex = 0;
+
+    function playCanonTick() {
+      const chordIdx = Math.floor(canonStepIndex / 4) % 8;
+      const arpIdx = canonStepIndex % 4;
+      const pianoFreq = CANON_PIANO_CHORDS[chordIdx][arpIdx];
+
+      // Gentle expressive rubato feel on piano velocity
+      const pianoVel = arpIdx === 0 ? 0.13 : 0.095;
+      playPianoNote(pianoFreq, 0, pianoVel, 1.85);
+
+      // Cello melody
+      const celloEvent = CANON_CELLO_CYCLES[canonCycleIndex][canonStepIndex];
+      if (celloEvent) {
+        const durSec = (celloEvent.d * CANON_STEP_MS) / 1000 + 0.14;
+        const celloVel = canonCycleIndex === 0 ? 0.10 : 0.135;
+        playCelloNote(celloEvent.f, 0, celloVel, durSec);
+      }
+
+      canonStepIndex++;
+      if (canonStepIndex >= 32) {
+        canonStepIndex = 0;
+        canonCycleIndex++;
+        if (canonCycleIndex >= CANON_CELLO_CYCLES.length) {
+          canonCycleIndex = 1; // Loop seamlessly through Themes 1–4
+        }
+      }
+    }
+
+    function toggleAmbientMusic() {
+      const vinyl = document.getElementById('vinylMini');
+      const eq = document.getElementById('eqBars');
+      const status = document.getElementById('musicStatusText');
+      const heroWave = document.getElementById('heroWaveBars');
+
+      if (isPlayingMusic) {
+        clearInterval(musicInterval);
+        musicInterval = null;
+        isPlayingMusic = false;
+        vinyl.classList.remove('playing');
+        eq.classList.remove('playing');
+        if (!isWelcomePlaying) heroWave.classList.remove('active-song');
+        status.textContent = 'Đã tạm dừng';
+      } else {
+        if (isWelcomePlaying) stopWelcomeCanon();
+        isPlayingMusic = true;
+        canonStepIndex = 0;
+        canonCycleIndex = 0;
+        vinyl.classList.add('playing');
+        eq.classList.add('playing');
+        heroWave.classList.add('active-song');
+        status.textContent = 'Đang tấu Canon in D...';
+
+        playCanonTick();
+        musicInterval = setInterval(playCanonTick, CANON_STEP_MS);
+      }
+    }
+
+    // ==================== 9. COSMIC STARS & FLOATING MUSIC NOTES CANVAS ====================
+    const canvas = document.getElementById('cosmic-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let bursts = [];
+    const symbols = ['✦', '★', '♪', '♫', '♩', '✧'];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 48; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: 10 + Math.random() * 13,
+        speedY: -0.25 - Math.random() * 0.45,
+        speedX: (Math.random() - 0.5) * 0.35,
+        alpha: 0.38 + Math.random() * 0.55,
+        symbol: symbols[Math.floor(Math.random() * symbols.length)],
+        wobble: Math.random() * Math.PI * 2
+      });
+    }
+
+    function spawnBurst(x, y) {
+      for (let i = 0; i < 8; i++) {
+        const angle = (Math.PI * 2 * i) / 8;
+        bursts.push({
+          x,
+          y,
+          vx: Math.cos(angle) * (1.6 + Math.random() * 2.2),
+          vy: Math.sin(angle) * (1.6 + Math.random() * 2.2) - 1,
+          life: 1,
+          symbol: symbols[Math.floor(Math.random() * symbols.length)]
+        });
+      }
+    }
+
+    window.addEventListener('click', (e) => {
+      if (e.target.closest('button') || e.target.closest('.figure-card') || e.target.closest('.project-card')) {
+        spawnBurst(e.clientX, e.clientY);
+      }
+    });
+
+    let lastTrail = 0;
+    window.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      if (now - lastTrail > 85) {
+        lastTrail = now;
+        bursts.push({
+          x: e.clientX,
+          y: e.clientY,
+          vx: (Math.random() - 0.5) * 0.8,
+          vy: -0.8 - Math.random() * 0.8,
+          life: 0.9,
+          symbol: Math.random() > 0.45 ? '✦' : '♪'
+        });
+      }
+    });
+
+    function animateCosmic() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(p => {
+        p.wobble += 0.022;
+        p.y += p.speedY;
+        p.x += p.speedX + Math.sin(p.wobble) * 0.25;
+
+        if (p.y < -30) {
+          p.y = canvas.height + 20;
+          p.x = Math.random() * canvas.width;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = p.alpha * (0.7 + 0.3 * Math.sin(p.wobble * 1.5));
+        ctx.font = `${p.size}px Quicksand, sans-serif`;
+        ctx.fillStyle = p.symbol === '♪' || p.symbol === '♫' || p.symbol === '♩' ? '#fff0f6' : '#ffe699';
+        ctx.shadowColor = 'rgba(255, 255, 255, 0.85)';
+        ctx.shadowBlur = 9;
+        ctx.fillText(p.symbol, p.x, p.y);
+        ctx.restore();
+      });
+
+      for (let i = bursts.length - 1; i >= 0; i--) {
+        const b = bursts[i];
+        b.x += b.vx;
+        b.y += b.vy;
+        b.life -= 0.024;
+        if (b.life <= 0) {
+          bursts.splice(i, 1);
+          continue;
+        }
+        ctx.save();
+        ctx.globalAlpha = b.life;
+        ctx.font = '15px Quicksand, sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = 'rgba(255, 214, 230, 0.9)';
+        ctx.shadowBlur = 6;
+        ctx.fillText(b.symbol, b.x, b.y);
+        ctx.restore();
+      }
+
+      requestAnimationFrame(animateCosmic);
+    }
+    animateCosmic();
+  </script>
+</body>
+</html>
